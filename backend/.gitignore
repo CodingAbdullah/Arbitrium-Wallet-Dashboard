@@ -1,0 +1,5 @@
+# Adding Node modules, preventing them from committed
+node_modules
+
+# Adding environment variables file, preventing it from being committed
+.env
