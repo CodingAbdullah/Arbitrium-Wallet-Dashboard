@@ -1,10 +1,9 @@
 // Adding Navbar
-
 const Navbar = () => {
     return (
             <nav className="navbar navbar-expand-lg navbar-light bg-dark">
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="/" style={{ color: 'white', fontWeight: 'bold' }}>Aribitrum Wallet Dashboard</a>
+                    <a className="navbar-brand" href="/" style={{ color: 'white', fontWeight: 'bold' }}>Arbitrum Wallet Dashboard</a>
                     <button style={{ backgroundColor: 'white' }} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                         <span style={{ color: 'white' }} className="navbar-toggler-icon"></span>
                     </button>
@@ -15,9 +14,6 @@ const Navbar = () => {
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" style={{ color: 'white' }} href="/about">About</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" style={{ color: 'white' }} href="/arbitrium-price-lookup">About</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" style={{ color: 'white' }} href="/erc721-token-holdings">ERC721 Token Holdings</a>
@@ -33,7 +29,7 @@ const Navbar = () => {
                             </li>
                         </ul>
                         <form className="d-flex">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                            <input className="form-control me-2" type="search" placeholder="Enter Address" aria-label="Search" />
                             <button className="btn btn-outline-success" type="submit">Search</button>
                         </form>
                     </div>
