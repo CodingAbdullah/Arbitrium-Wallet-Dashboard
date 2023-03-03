@@ -1,7 +1,8 @@
 // Adding footer to project
 import './footer.css';
+import React from 'react';
 
-const Footer = () => {
+const Footer: React.FC = () => {
     const statement = "Copyright "  + new Date().getFullYear() + ". Powered By ";
 
     return (

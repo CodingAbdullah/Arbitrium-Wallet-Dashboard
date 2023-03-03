@@ -1,6 +1,7 @@
+import React from 'react';
 import { useNavigate } from 'react-router';
 
-const AboutPage = () => {
+const AboutPage: React.FC = () => {
     const navigate = useNavigate();
     
     // Adding About page
@@ -13,9 +14,9 @@ const AboutPage = () => {
                     </div>
                     <div className="d-flex justify-content-between flex-wrap flex-md-nowrap pt-3 pb-2 mb-3 border-bottom">
                             <p className="p-1">
-                                The Arbitrium Wallet Dashboard is a lightweight implementation of the main 
-                                <a href="https://ethwdashboard.xyz" style={{ color: 'black', fontWeight: 'bold' }} target="_blank" rel="noreferrer"> Ethereum dashboard</a>. 
-                                Information related to features of this Layer 2 are available here including token lookups, wallet analysis, and gas prices.
+                                The Arbitrium Wallet Dashboard is a lightweight implementation of this 
+                                <a href="https://ethwdashboard.xyz" style={{ color: 'black', fontWeight: 'bold' }} target="_blank" rel="noreferrer"> Dashboard</a>. 
+                                Features available here include token lookups, wallet analysis, and gas prices.
                             </p>
                     </div>
                     <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">

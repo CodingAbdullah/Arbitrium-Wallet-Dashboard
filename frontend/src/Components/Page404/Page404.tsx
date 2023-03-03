@@ -1,6 +1,7 @@
+import React from 'react';
 import { useNavigate } from "react-router";
 
-const Page404 = () => {
+const Page404: React.FC = () => {
     const navigate = useNavigate();
 
     // Adding a generic page to handle invalid paths
