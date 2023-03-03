@@ -1,24 +1,18 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Components/Navbar/navbar';
-import Side from './Components/Side/side';
-import Footer from './Components/Footer/footer';
 import HomePage from './Components/HomePage/homepage';
-import { ProSidebarProvider } from 'react-pro-sidebar';
+import './App.css';
 
 const App = () => {
   return (
-    <ProSidebarProvider>
-      <div className="App">
-        <Navbar />
-        <Side />
-        <Router>
-          <Routes>
-            <Route path="/" element={<HomePage />}></Route>
-          </Routes>
-        </Router>
-        <Footer />
-      </div>
-    </ProSidebarProvider>
+    <div className="App">
+      <Navbar />
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />}></Route>
+        </Routes>
+      </Router>
+    </div>
   );
 }
 
