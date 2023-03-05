@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
                                 <a className="nav-link" style={{ color: 'white' }} href="/gas">Gas</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" style={{ color: 'white' }} href="/wallet-token-analytics">Wallet/Token Analytics</a>
+                                <a className="nav-link" style={{ color: 'white' }} href="/wallet-analytics">Wallet Analytics</a>
                             </li>
                         </ul>
                         <form className="d-flex">

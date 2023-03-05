@@ -6,6 +6,7 @@ import HomePage from './Components/HomePage/homepage';
 import Footer from './Components/Footer/footer';
 import Page404 from './Components/Page404/Page404';
 import './App.css';
+import WalletAnalyticsPage from './Components/WalletAnalyticsPage/WalletAnalyticsPage';
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/about" element={<AboutPage />}></Route>
           <Route path="/" element={<HomePage />}></Route>
+          <Route path="/wallet-analytics" element={<WalletAnalyticsPage />}></Route>
           <Route path="*" element={<Page404 />}></Route>
         </Routes>
       </Router>
