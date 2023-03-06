@@ -34,7 +34,7 @@ const ERC721LookupsPage: FC = () => {
                 <div className="jumbotron bg-light p-3">                    
                     <form onSubmit={ e => tokenHandler(e) }>
                         <p style={{ marginRight: '0.5rem' }}>Enter <b>ERC721 Contract Address</b> & <b>Token ID</b> for Lookup </p>
-                        <input style={{ marginTop: '1rem' }} ref={ tokenAddress } type="text" placeholder="Enter ERC721 Contract Address" required />
+                        <input style={{ marginTop: '1rem' }} ref={ tokenAddress } type="text" placeholder="Enter Contract Address" required />
                         <br />
                         <input style={{ marginTop: '1rem' }} ref={ tokenID } type="number" placeholder="Enter Token ID" required />
                         <br />

@@ -10,7 +10,6 @@ const GasTrackerPage = () => {
     const clearHandler = () => {
 
     }
-    
  
     // Using parent-child component hierarchy, pass down state information for display and leaner code
     return (
@@ -25,9 +24,9 @@ const GasTrackerPage = () => {
                         <button style={{ marginTop: '3rem'}} onClick={() => navigate("/")} className='btn btn-success'>Go Home</button>
                     </div>
                 </div>
-                </main>
-            </div>
-        )
-    }
+            </main>
+        </div>
+    )
+}
 
 export default GasTrackerPage;

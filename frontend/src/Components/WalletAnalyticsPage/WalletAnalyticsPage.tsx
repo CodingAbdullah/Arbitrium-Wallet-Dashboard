@@ -3,6 +3,11 @@ import { useNavigate } from 'react-router';
 import Alert from '../Alert/Alert';
 
 const WalletTokenAnalyticsPage: FC = () => {
+    // Set hooks and state
+    const navigate = useNavigate();
+    const walletAddress = useRef<HTMLInputElement>(null);
+    const [setAlert, updateAlert] = useState<boolean>(false);
+
     const styles = {
         paragraphSpace: {
             paddingTop: '2rem'
@@ -11,11 +16,6 @@ const WalletTokenAnalyticsPage: FC = () => {
             paddingBottom: '2rem'
         }
     }
-
-    // Set hooks
-    const navigate = useNavigate();
-    const walletAddress = useRef<HTMLInputElement>(null);
-    const [setAlert, updateAlert] = useState<boolean>(false);
 
     const clearHandler = () => {
         updateAlert(false);
@@ -38,7 +38,7 @@ const WalletTokenAnalyticsPage: FC = () => {
                 <h1 className="h2">Wallet Analytics</h1>
             </div>
             { setAlert ? <Alert type="danger" /> : null } 
-            <main role="main" className="p-3 bg-light">
+            <main role="main" className=" bg-light">
                 <div className="jumbotron">
                     <div className="container">
                         <div style={ styles.paragraphSpace }>
@@ -46,7 +46,7 @@ const WalletTokenAnalyticsPage: FC = () => {
                                 <label>Enter a <b>Wallet Address</b> for analytics:</label>
                                 <input style={{ marginLeft: '0.5rem' }} type="text" ref={ walletAddress } placeholder='Enter Wallet Address' required  />
                                 <br />
-                                <button style={{ marginTop: '2rem' }} type="submit" className='btn btn-success'>Check Wallet</button>
+                                <button style={{ marginTop: '1rem' }} type="submit" className='btn btn-success'>Check Wallet</button>
                             </form>
                             <button style={{ display: 'inline' }} className='btn btn-primary' onClick={ () => navigate("/") }>Go Home</button>
                             <button style={{ marginLeft: '2rem' }} className='btn btn-warning' onClick={ clearHandler }>Clear</button>
@@ -57,7 +57,6 @@ const WalletTokenAnalyticsPage: FC = () => {
             </main>
         </div>
     )
-
 }
 
 export default WalletTokenAnalyticsPage;

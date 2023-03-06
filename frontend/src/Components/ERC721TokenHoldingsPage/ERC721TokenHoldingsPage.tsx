@@ -35,9 +35,9 @@ const ERC721TokenHoldingsPage: FC = () => {
                     <div className="container">
                         <form onSubmit={ (e) => formHandler(e) }>
                             <label>Enter <b>wallet address</b> for list of ERC-721 Holdings and Transfers:</label>
-                            <input style={{ marginLeft: '0.5rem' }} type='text' placeholder='Enter Address Here' />
+                            <input style={{ marginLeft: '0.5rem' }} type='text' placeholder='Enter Wallet Address' />
                             <br />
-                            <button style={{ marginTop: '2rem' }} type='submit' className='btn btn-success'>View Holdings</button>
+                            <button style={{ marginTop: '1rem' }} type='submit' className='btn btn-success'>View Holdings</button>
                         </form>
                         <button style={{ marginTop: '2rem', display: 'inline' }} className='btn btn-primary' onClick={ () => navigate("/") }>Go Home</button>
                         <button style={{ marginTop: '2rem', marginLeft: '2rem' }} className='btn btn-warning' onClick={ clearHandler }>Clear</button> 
