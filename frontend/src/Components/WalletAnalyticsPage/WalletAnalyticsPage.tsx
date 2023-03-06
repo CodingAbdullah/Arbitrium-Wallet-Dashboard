@@ -1,8 +1,8 @@
-import React, { FormEvent, useRef, useState } from 'react';
+import { FC, FormEvent, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import Alert from '../Alert/Alert';
 
-const WalletTokenAnalyticsPage: React.FC = () => {
+const WalletTokenAnalyticsPage: FC = () => {
     const styles = {
         paragraphSpace: {
             paddingTop: '2rem'
@@ -21,7 +21,7 @@ const WalletTokenAnalyticsPage: React.FC = () => {
         updateAlert(false);
     }
 
-    const formHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    const formHandler = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault(); // Prevent abnormal form submission
 
         if (walletAddress.current?.value.length !== 42 || walletAddress.current?.value.substring(0, 2) !== '0x') {
