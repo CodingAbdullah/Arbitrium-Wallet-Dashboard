@@ -33,11 +33,11 @@ const ERC721TokenHoldingsPage: FC = () => {
                 { alert ? <Alert type='danger' /> : null }
                 <div className="jumbotron bg-light p-3">
                     <div className="container">
-                        <p>Enter <b>wallet address</b> for list of ERC-721 Holdings and Transfers</p>
                         <form onSubmit={ (e) => formHandler(e) }>
+                            <label>Enter <b>wallet address</b> for list of ERC-721 Holdings and Transfers:</label>
                             <input style={{ marginLeft: '0.5rem' }} type='text' placeholder='Enter Address Here' />
                             <br />
-                            <button style={{ marginTop: '2rem' }} type='submit' className='btn btn-success'>Submit</button>
+                            <button style={{ marginTop: '2rem' }} type='submit' className='btn btn-success'>View Holdings</button>
                         </form>
                         <button style={{ marginTop: '2rem', display: 'inline' }} className='btn btn-primary' onClick={ () => navigate("/") }>Go Home</button>
                         <button style={{ marginTop: '2rem', marginLeft: '2rem' }} className='btn btn-warning' onClick={ clearHandler }>Clear</button> 

@@ -2,10 +2,10 @@ const HomePageDescriptionSection = () => {
 
     // Decoupled from home page to make components leaner, functions passed down from parent as props
     return (
-        <div className="jumbotron">
-            <div className="container bg-light p-5">
+        <div className="jumbotron bg-light">
+            <div className="container p-3">
                 <h1 style={{ marginBottom: '2rem' }}>Welcome!</h1>
-                <p> Anything you need to investigate on the Arbitrium blockchain is provided to you ready-made for free. <br /> 
+                <p> Anything you need to investigate on the Arbitrum blockchain is provided to you ready-made for free. <br /> 
                     Deep dive into collections, wallet information, and much more.</p>
                 <p> Enter the <b>public</b> address below (42-digit hex code) of a wallet to track activity. </p>
                 <form style={{ marginTop: '3rem' }}>

@@ -38,7 +38,7 @@ const ERC721LookupsPage: FC = () => {
                         <br />
                         <input style={{ marginTop: '1rem' }} ref={ tokenID } type="number" placeholder="Enter Token ID" required />
                         <br />
-                        <button style={{ marginTop: '2rem' }} type="submit" className="btn btn-success">Lookup</button>
+                        <button style={{ marginTop: '2rem' }} type="submit" className="btn btn-success">View Lookup</button>
                     </form>
                     <button style={{ marginTop: '2rem', display: 'inline' }} className='btn btn-primary' onClick={ () => navigate("/") }>Go Home</button>
                     <button style={{ marginTop: '2rem', marginLeft: '2rem' }} className='btn btn-warning' onClick={ clearHandler }>Clear</button>
