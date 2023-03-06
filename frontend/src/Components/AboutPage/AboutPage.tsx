@@ -6,7 +6,7 @@ const AboutPage: React.FC = () => {
     
     // Adding About page
     return (
-        <div className='about'>
+        <div className='about p-3'>
                 <main role="main">
                     <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                             <h1 className="p-2">About</h1>
