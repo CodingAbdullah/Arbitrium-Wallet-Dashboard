@@ -34,7 +34,7 @@ const ERC720HoldingsPage: FC = () => {
                 <div className="jumbotron bg-light">
                     <div className="container">
                         <form onSubmit={ walletHandler }>
-                            <label style={{ marginRight: '0.5rem' }}>Enter <b>Wallet Address</b> for ERC20 Token Holdings: </label>
+                            <label style={{ marginRight: '0.5rem' }}>Enter <b>Wallet Address</b> for ERC20 Token Holdings and Transfers: </label>
                             <input style={{ marginTop: '2rem' }} type="text" placeholder="Enter Wallet Address" required />
                             <br />
                             <button style={{ marginTop: '1rem' }} type="submit" className="btn btn-success">View Holdings</button>

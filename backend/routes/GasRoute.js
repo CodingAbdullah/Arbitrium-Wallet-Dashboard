@@ -3,6 +3,6 @@ const router = express.Router();
 const GasController = require("../controller/GasController");
 
 // Adding routes here
-router.post("/gas-track", GasController.GasController);
+router.get("/gas-track", GasController.GasController);
 
 module.exports = router;
