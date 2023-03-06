@@ -8,6 +8,7 @@ import Page404 from './Components/Page404/Page404';
 import './App.css';
 import ERC721TokenHoldingsPage from './Components/ERC721TokenHoldingsPage/ERC721TokenHoldingsPage';
 import WalletAnalyticsPage from './Components/WalletAnalyticsPage/WalletAnalyticsPage';
+import ERC721LookupsPage from './Components/ERC721TokenLookupsPage/ERC721TokenLookupsPage';
 
 const App: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ const App: React.FC = () => {
           <Route path="/about" element={<AboutPage />}></Route>
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/erc721-token-holdings" element={<ERC721TokenHoldingsPage/>}></Route>
+          <Route path="/erc721-token-lookup" element={<ERC721LookupsPage/>}></Route>
           <Route path="/wallet-analytics" element={<WalletAnalyticsPage />}></Route>
           <Route path="*" element={<Page404 />}></Route>
         </Routes>
