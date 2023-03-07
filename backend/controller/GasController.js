@@ -24,6 +24,9 @@ exports.getGasPrice = (req, res) => {
         });
     })
     .catch(err => {
-        console.error(err);
+        // Send back error that is caught
+        res.status(400).json({
+            error: err
+        });
     });
 }

@@ -37,6 +37,7 @@ const WalletTokenAnalyticsPage: FC = () => {
         e.preventDefault(); // Prevent abnormal form submission
 
         if (walletAddress.current?.value.length !== 42 || walletAddress.current?.value.substring(0, 2) !== '0x') {
+            updateEmptyAlert(false);
             updateAlert(true);
         }
         else {
