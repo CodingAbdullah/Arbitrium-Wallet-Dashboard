@@ -28,7 +28,7 @@ exports.getERC20Holdings = (req, res) => {
 }
 
 exports.getERC20Transfers = (req, res) => {
-    const { walletAddress } = req.body.body;
+    const { walletAddress } = JSON.parse(req.body.body);
 
     const options = {
         method: 'GET',
