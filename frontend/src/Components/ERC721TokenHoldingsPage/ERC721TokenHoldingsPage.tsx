@@ -1,26 +1,72 @@
 import { FC, FormEvent, useRef, useState } from 'react';
 import { useNavigate } from "react-router";
+import { ERC721HoldingType } from '../../utils/types/ERC721HoldingType';
+import { ERC721TransferType } from '../../utils/types/ERC721TransferType';
+import ERC721HoldingsInfoTable from '../ERC721HoldingsInfoTable/ERC721HoldingsInfoTable';
+import ERC721TransfersInfoTable from '../ERC721TransfersInfoTable/ERC721TransfersInfoTable';
 import Alert from '../Alert/Alert';
+import axios from 'axios';
 
 const ERC721TokenHoldingsPage: FC = () => {
     // Set up state and hooks
     const [alert, updateAlert] = useState<boolean>(false);
-    const walletAddress = useRef<string>("");
+    const [emptyAlert, updateEmptyAlert] = useState<boolean>(false);
+
+    const [erc721HoldingData, updateERC721HoldingData] = useState<ERC721HoldingType>();
+    const [erc721TransferData, updateERC721TransferData] = useState<ERC721TransferType>();
+
+    const walletAddress = useRef<HTMLInputElement>();
     const navigate = useNavigate();
 
+    
     // Clear and Form handlers
     const clearHandler = () => {
         updateAlert(false);
+        updateEmptyAlert(false);
+        updateERC721HoldingData(undefined);
+        updateERC721TransferData(undefined);
     }
 
     const formHandler = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (walletAddress.current.length !== 42 || walletAddress.current.substring(0, 2) !== '0x'){
+        if (walletAddress.current?.value.length !== 42 || walletAddress.current.value.substring(0, 2) !== '0x'){
+            updateEmptyAlert(false);
             updateAlert(true);
         }
         else {
+            updateAlert(false);
 
+            const options = {
+                method: 'POST',
+                body: JSON.stringify({ address : walletAddress }),
+                headers : {
+                    'content-type': 'application/json'
+                }
+            }
+
+            // Make calls to fetch ERC721 holdings and transfers of a particular wallet on the Arbitrum network
+            axios.post('http://localhost:5001/get-erc721-holdings', options)
+            .then(response => {
+                // Check to see if length of holdings is equal to 0, if not populate state
+                if (response.data.holdings.result.length === 0) {
+                    updateEmptyAlert(true);
+                }
+                else {
+                    updateERC721HoldingData(response.data.holdings);
+                }
+            });
+
+            axios.post('http://localhost:5001/get-erc721-transfers', options)
+            .then(response => {
+                // Check to see if length of holdings is equal to 0, if not populate state
+                if (response.data.transfers.result.length === 0) {
+                    updateEmptyAlert(true);
+                }
+                else {
+                    updateERC721TransferData(response.data.transfers);
+                }
+            });
         }
     }
     
@@ -30,7 +76,8 @@ const ERC721TokenHoldingsPage: FC = () => {
                 <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 className="h2">ERC-721 Token Holdings</h1>
                 </div>
-                { alert ? <Alert type='danger' /> : null }
+                { alert ? <Alert type="danger" /> : null }
+                { emptyAlert ? <Alert type="warning" /> : null }
                 <div className="jumbotron bg-light p-3">
                     <div className="container">
                         <form onSubmit={ (e) => formHandler(e) }>
@@ -44,9 +91,45 @@ const ERC721TokenHoldingsPage: FC = () => {
                     </div>
                 </div>
             </main>
+            { 
+                emptyAlert ? null : 
+                    <>
+                        <main className="p-3" role="main">
+                                <div>
+                                    {
+                                        erc721HoldingData === undefined ? null :
+                                            <>
+                                                <main style={{marginTop: '5rem'}} role="main">
+                                                    <div style={{marginTop: '1rem'}} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                                                        <h3 className="h3">ERC-721 Token Holdings</h3>
+                                                    </div>
+                                                </main>
+                                                <ERC721HoldingsInfoTable data={ erc721HoldingData } />
+                                            </>
+                                    }
+                                </div>
+                        </main>
+                        <main className="p-3" role="main">
+                            <div>
+                                {
+                                    erc721TransferData === undefined ? null :
+                                        <>
+                                            <main style={{marginTop: '5rem'}} role="main">
+                                                <div style={{marginTop: '1rem'}} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                                                    <h3 className="h3">Sample ERC-721 Transfers</h3>
+                                                </div>
+                                            </main>
+                                            <ERC721TransfersInfoTable address={ walletAddress.current!.value } data={ erc721TransferData } />
+                                        </>
+                                }
+                            </div>
+                        </main>
+                    </>
+            }
         </div>
     )
 
 }
 
 export default ERC721TokenHoldingsPage;
+
