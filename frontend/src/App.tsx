@@ -11,6 +11,7 @@ import WalletAnalyticsPage from './Components/WalletAnalyticsPage/WalletAnalytic
 import ERC721LookupsPage from './Components/ERC721TokenLookupsPage/ERC721TokenLookupsPage';
 import ERC720HoldingsPage from './Components/ERC20TokenHoldingsPage/ERC20TokenHoldingsPage';
 import GasTrackerPage from './Components/GasPricesPage/GasPricesPage';
+import WalletAnalyticsResultPage from './Components/WalletAnalyticsResultPage/WalletAnalyticsResultPage';
 
 const App: React.FC = () => {
   return (
@@ -25,6 +26,7 @@ const App: React.FC = () => {
           <Route path="/erc721-token-lookups" element={<ERC721LookupsPage />}></Route>
           <Route path="/gas-tracker" element={<GasTrackerPage />}></Route>
           <Route path="/wallet-analytics" element={<WalletAnalyticsPage />}></Route>
+          <Route path="wallet-analytics-result" element={<WalletAnalyticsResultPage />}></Route>
           <Route path="*" element={<Page404 />}></Route>
         </Routes>
       </Router>
