@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
-import { GasStateType }  from '../../types/constants';
+import { GasStateType }  from '../../utils/types/GasStateType';
 
-const GasTrackerPage = () => {
-
+const GasTrackerPage: FC = () => {
+    // Adding hooks and state
     const navigate = useNavigate();
     const [gasState, updateGasState] = useState<GasStateType>();
 
@@ -33,10 +32,6 @@ const GasTrackerPage = () => {
                         <h4>General Metrics</h4> 
                         <br />
                         <p>
-                            <b>Date Updated: </b>
-                            { new Date().toISOString().split("T")[0] + " " + new Date().toISOString().split("T")[1].split(".")[0] + " - GMT" }
-                        </p>
-                        <p>
                             <b>JSON RPC: </b>
                             { gasState.chainInformation.jsonrpc }
                         </p>
@@ -48,8 +43,12 @@ const GasTrackerPage = () => {
                             <b>Gas Price: </b>
                             { gasState.gasPrice }
                         </p>
+                        <p>
+                            <b>Date Updated: </b>
+                            { new Date().toISOString().split("T")[0] + " " + new Date().toISOString().split("T")[1].split(".")[0] + " - GMT" }
+                        </p>
                         <div>
-                            <button style={{ marginTop: '3rem' }} onClick={() => navigate("/")} className='btn btn-success'>Go Home</button>
+                            <button style={{ marginTop: '2rem', marginBottom: '1rem' }} onClick={() => navigate("/")} className='btn btn-success'>Go Home</button>
                         </div>
                     </div>
                 </main>

@@ -39,8 +39,8 @@ const ERC720HoldingsPage: FC = () => {
                             <br />
                             <button style={{ marginTop: '1rem' }} type="submit" className="btn btn-success">View Holdings</button>
                         </form>
-                        <button style={{ marginTop: '2rem', display: 'inline' }} className='btn btn-primary' onClick={ () => navigate("/") }>Go Home</button>
-                        <button style={{ marginTop: '2rem', marginLeft: '2rem' }} className='btn btn-warning' onClick={ clearHandler }>Clear</button>
+                        <button style={{ marginTop: '2rem', display: 'inline', marginBottom: '1rem' }} className='btn btn-primary' onClick={ () => navigate("/") }>Go Home</button>
+                        <button style={{ marginTop: '2rem', marginLeft: '2rem', marginBottom: '1rem' }} className='btn btn-warning' onClick={ clearHandler }>Clear</button>
                     </div>
                 </div>
             </main>

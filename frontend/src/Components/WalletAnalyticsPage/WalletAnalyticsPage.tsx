@@ -1,12 +1,21 @@
 import { FC, FormEvent, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import Alert from '../Alert/Alert';
+import WalletTransactionsInfoTable from '../../Components/WalletTransactionsInfoTable/WalletTransactionsInfoTable';
+import WalletInternalTransactionsInfoTable from '../../Components/WalletInternalTransactionsInfoTable/WalletInternalTransactionsInfoTable';
+import { WalletTransactionType } from '../../utils/types/WalletTransactionType';
+import { WalletInternalTransactionType } from '../../utils/types/WalletInternalTransactionType';
+import axios from 'axios';
 
 const WalletTokenAnalyticsPage: FC = () => {
     // Set hooks and state
     const navigate = useNavigate();
     const walletAddress = useRef<HTMLInputElement>(null);
     const [setAlert, updateAlert] = useState<boolean>(false);
+    const [emptyAlert, updateEmptyAlert] = useState<boolean>(false);
+
+    const [walletTransactionState, updateWalletTransactionState] = useState<WalletTransactionType>();
+    const [walletInternalTransactionState, updateInternalTransactionState] = useState<WalletInternalTransactionType>();
 
     const styles = {
         paragraphSpace: {
@@ -19,6 +28,9 @@ const WalletTokenAnalyticsPage: FC = () => {
 
     const clearHandler = () => {
         updateAlert(false);
+        updateEmptyAlert(false);
+        updateInternalTransactionState(undefined);
+        updateWalletTransactionState(undefined);
     }
 
     const formHandler = (e: FormEvent<HTMLFormElement>) => {
@@ -29,15 +41,53 @@ const WalletTokenAnalyticsPage: FC = () => {
         }
         else {
             updateAlert(false);
+            
+            // Adding options to request body
+            let options = {
+                method: 'POST',
+                body: JSON.stringify({ walletAddress }),
+                headers: {
+                    'content-type' : 'application/json'
+                }
+            }
+
+            // Requesting list of transactions
+            axios.post("http://localhost:5001/transactions", options)
+            .then(response => {
+                if (response.data.txns.result.length === 0) {
+                    updateEmptyAlert(true);
+                    updateAlert(false);
+                }
+                else {
+                    updateWalletTransactionState(response.data.txns.result);
+                    updateEmptyAlert(false);
+                    updateAlert(false);
+                }
+            });
+
+            // Request list of internal transactions
+            axios.post("http://localhost:5001/internal-transactions", options)
+            .then(response => {
+                if (response.data.txns.result.length === 0) {
+                    updateEmptyAlert(true);
+                    updateAlert(false);
+                }
+                else {
+                    updateInternalTransactionState(response.data.txns.result);
+                    updateEmptyAlert(false);
+                    updateAlert(false);
+                }
+            });
         }
     }
-
+    
     return (
         <div className="wallet-token-analytics-page p-3">
             <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 className="h2">Wallet Analytics</h1>
             </div>
             { setAlert ? <Alert type="danger" /> : null } 
+            { emptyAlert ? <Alert type="warning" /> : null } 
             <main role="main" className=" bg-light">
                 <div className="jumbotron">
                     <div className="container">
@@ -48,13 +98,35 @@ const WalletTokenAnalyticsPage: FC = () => {
                                 <br />
                                 <button style={{ marginTop: '1rem' }} type="submit" className='btn btn-success'>Check Wallet</button>
                             </form>
-                            <button style={{ display: 'inline' }} className='btn btn-primary' onClick={ () => navigate("/") }>Go Home</button>
-                            <button style={{ marginLeft: '2rem' }} className='btn btn-warning' onClick={ clearHandler }>Clear</button>
-                        </div>
-                        
+                            <button style={{ display: 'inline', marginBottom: '2rem' }} className='btn btn-primary' onClick={ () => navigate("/") }>Go Home</button>
+                            <button style={{ marginLeft: '2rem', marginBottom: '2rem' }} className='btn btn-warning' onClick={ clearHandler }>Clear</button>
+                        </div>     
                     </div>
                 </div>
             </main>
+            {
+                walletTransactionState === undefined || emptyAlert || setAlert ? null :
+                    <>
+                        <main style={{ marginTop: '5rem' }} role="main">
+                            <div style={{ marginTop: '1rem' }} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                                <h3 className="h3">Transactions</h3>
+                            </div>
+                        </main>
+                        <WalletTransactionsInfoTable address={ walletAddress.current!.value } data={ walletTransactionState } /> 
+                    </>
+            }
+            {
+                walletInternalTransactionState === undefined || emptyAlert || setAlert ? null :
+                    <>
+                        <main style={{ marginTop: '5rem' }} role="main">
+                            <div style={{ marginTop: '1rem' }} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                                <h3 className="h3">Internal Transactions</h3>
+                            </div>
+                        </main>
+                        <WalletInternalTransactionsInfoTable address={ walletAddress.current!.value } data={ walletInternalTransactionState } /> 
+                    </>
+            }
+
         </div>
     )
 }
