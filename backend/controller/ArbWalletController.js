@@ -9,6 +9,7 @@ exports.getWalletTransactions = (req, res) => {
     axios.get(ARBISCAN_URL + '?module=account&action=txlist&address=' + walletAddress + 
                 '&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=' + process.env.ARBISCAN_API_KEY)
     .then(response => {
+        console.log(response.data);
         res.status(200).json({
             txns: response.data
         });
@@ -27,6 +28,7 @@ exports.getInternalWalletTransactions = (req, res) => {
     axios.get(ARBISCAN_URL + '?module=account&action=txlistinternal&address=' + walletAddress + 
                 '&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=' + process.env.ARBISCAN_API_KEY)
     .then(response => {
+        console.log(response.data);
         res.status(200).json({
             txns: response.data
         });

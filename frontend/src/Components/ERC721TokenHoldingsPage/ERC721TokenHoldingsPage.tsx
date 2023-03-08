@@ -15,7 +15,7 @@ const ERC721TokenHoldingsPage: FC = () => {
     const [erc721HoldingData, updateERC721HoldingData] = useState<ERC721HoldingType>();
     const [erc721TransferData, updateERC721TransferData] = useState<ERC721TransferType>();
 
-    const walletAddress = useRef<HTMLInputElement>();
+    const address = useRef<HTMLInputElement>();
     const navigate = useNavigate();
 
     
@@ -30,7 +30,7 @@ const ERC721TokenHoldingsPage: FC = () => {
     const formHandler = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (walletAddress.current?.value.length !== 42 || walletAddress.current.value.substring(0, 2) !== '0x'){
+        if (address.current?.value.length !== 42 || address.current.value.substring(0, 2) !== '0x'){
             updateEmptyAlert(false);
             updateAlert(true);
         }
@@ -39,7 +39,7 @@ const ERC721TokenHoldingsPage: FC = () => {
 
             const options = {
                 method: 'POST',
-                body: JSON.stringify({ address : walletAddress }),
+                body: JSON.stringify({ address }),
                 headers : {
                     'content-type': 'application/json'
                 }
@@ -121,7 +121,7 @@ const ERC721TokenHoldingsPage: FC = () => {
                                                     <h3 className="h3">Sample ERC-721 Transfers</h3>
                                                 </div>
                                             </main>
-                                            <ERC721TransfersInfoTable address={ walletAddress.current!.value } data={ erc721TransferData } />
+                                            <ERC721TransfersInfoTable address={ address.current!.value } data={ erc721TransferData } />
                                         </>
                                 }
                             </div>

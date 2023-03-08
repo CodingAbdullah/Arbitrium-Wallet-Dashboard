@@ -10,7 +10,7 @@ import axios from 'axios';
 const WalletTokenAnalyticsPage: FC = () => {
     // Set hooks and state
     const navigate = useNavigate();
-    const walletAddress = useRef<HTMLInputElement>(null);
+    const address = useRef<HTMLInputElement>(null);
     const [setAlert, updateAlert] = useState<boolean>(false);
     const [emptyAlert, updateEmptyAlert] = useState<boolean>(false);
 
@@ -36,7 +36,7 @@ const WalletTokenAnalyticsPage: FC = () => {
     const formHandler = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault(); // Prevent abnormal form submission
 
-        if (walletAddress.current?.value.length !== 42 || walletAddress.current?.value.substring(0, 2) !== '0x') {
+        if (address.current?.value.length !== 42 || address.current?.value.substring(0, 2) !== '0x') {
             updateEmptyAlert(false);
             updateAlert(true);
         }
@@ -46,7 +46,7 @@ const WalletTokenAnalyticsPage: FC = () => {
             // Adding options to request body
             let options = {
                 method: 'POST',
-                body: JSON.stringify({ walletAddress }),
+                body: JSON.stringify({ address }),
                 headers: {
                     'content-type' : 'application/json'
                 }
@@ -95,7 +95,7 @@ const WalletTokenAnalyticsPage: FC = () => {
                         <div style={ styles.paragraphSpace }>
                             <form style={ styles.form } onSubmit={ e => formHandler(e) }>
                                 <label>Enter a <b>Wallet Address</b> for analytics:</label>
-                                <input style={{ marginLeft: '0.5rem' }} type="text" ref={ walletAddress } placeholder='Enter Wallet Address' required  />
+                                <input style={{ marginLeft: '0.5rem' }} type="text" ref={ address } placeholder='Enter Wallet Address' required  />
                                 <br />
                                 <button style={{ marginTop: '1rem' }} type="submit" className='btn btn-success'>Check Wallet</button>
                             </form>
@@ -113,7 +113,7 @@ const WalletTokenAnalyticsPage: FC = () => {
                                 <h3 className="h3">Transactions</h3>
                             </div>
                         </main>
-                        <WalletTransactionsInfoTable address={ walletAddress.current!.value } data={ walletTransactionState } /> 
+                        <WalletTransactionsInfoTable address={ address.current!.value } data={ walletTransactionState } /> 
                     </>
             }
             {
@@ -124,7 +124,7 @@ const WalletTokenAnalyticsPage: FC = () => {
                                 <h3 className="h3">Internal Transactions</h3>
                             </div>
                         </main>
-                        <WalletInternalTransactionsInfoTable address={ walletAddress.current!.value } data={ walletInternalTransactionState } /> 
+                        <WalletInternalTransactionsInfoTable address={ address.current!.value } data={ walletInternalTransactionState } /> 
                     </>
             }
 

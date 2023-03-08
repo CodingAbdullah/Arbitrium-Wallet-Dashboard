@@ -24,7 +24,7 @@ const WalletAnalyticsResultPage: FC = () => {
         else {
             let options = {
                 method: "GET",
-                body: JSON.stringify({ address: address }),
+                body: JSON.stringify({ address }),
                 headers : {
                     'content-type' : 'application/json'
                 }

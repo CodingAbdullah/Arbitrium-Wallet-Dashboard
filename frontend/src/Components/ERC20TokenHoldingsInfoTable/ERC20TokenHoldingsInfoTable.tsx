@@ -5,7 +5,7 @@ const ERC20TokenHoldingsInfoTable = (props : { data: ERC20HoldingType[] }) => {
     const { data } = props;
 
     return (
-        <div style={{ overflowX: 'scroll', paddingBottom: '2rem' }}>
+        <div className="p-3" style={{ overflowX: 'scroll', paddingBottom: '2rem' }}>
             <table style={{ border: '1px solid black' }}>
                 <thead style={{ border: '1px solid black' }}>
                     <tr style={{ border: '1px solid black' }}>
@@ -27,7 +27,7 @@ const ERC20TokenHoldingsInfoTable = (props : { data: ERC20HoldingType[] }) => {
                                     <td style={{ border: '1px solid black' }}>{ record.name }</td>
                                     <td style={{ border: '1px solid black' }}>{ record.token_address }</td>
                                     <td style={{ border: '1px solid black' }}>{ record.symbol }</td>
-                                    <td style={{ border: '1px solid black' }}>{ record.balance }</td>
+                                    <td style={{ border: '1px solid black' }}>{ Number(record.balance)/1000000000000000000 }</td>
                                 </tr>
                             )
                         }

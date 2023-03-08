@@ -18,6 +18,7 @@ exports.getGasPrice = (req, res) => {
     axios.get(ARBISCAN_URL + "?module=proxy&action=eth_gasPrice&apikey=" + process.env.ARBISCAN_API_KEY, options)
     .then(response => {
         // Gas is given in WEI in HEX format, convert to Decimal and divide by 10^9 for GWEI evaluation
+        console.log(response.data);
         res.status(200).json({
             chainInformation: response.data,
             gasPrice: hex2dec.hexToDec(response.data.result)/1000000000 + " Gwei"

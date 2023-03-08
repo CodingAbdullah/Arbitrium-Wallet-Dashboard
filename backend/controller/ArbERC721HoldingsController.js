@@ -18,6 +18,7 @@ exports.getERC721Holdings = (req, res) => {
     // Pass in address and chain values
     axios.get(MORALIS_URL + walletAddress + '/nft?chain=arbitrum&format=decimal', options)
     .then(response => {
+            console.log(response.data);
             res.status(200).json({
                 holdings: response.data
             });
@@ -47,6 +48,7 @@ exports.getERC721Transfers = (req, res) => {
     // Pass in address and chain values
     axios.get(MORALIS_URL + walletAddress + '/nft/transfers?chain=arbitrum&format=decimal&direction=both', options)
     .then(response => {
+            console.log(response.data);
             res.status(200).json({
                 transfers: response.data
             });

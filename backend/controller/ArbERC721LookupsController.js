@@ -17,6 +17,7 @@ exports.erc721TokenLookup = (req, res) => {
     // Make request for token lookup data
     axios.get(MORALIS_URL + 'nft/' + address + "/" + id + "?chain=arbitrum&format=decimal", options)
     .then(response => {
+        console.log(response.data);
         res.status(200).json({ 
             lookupInformation: response.data 
         });
@@ -44,11 +45,12 @@ exports.erc721TokenTransferLookup = (req, res) => {
 
     // Make request for token lookp transfers
     axios.get(MORALIS_URL + 'nft/' + address + "/" + id + LOOKUP_ENDPOINT + "?chain=arbitrum&format=decimal", options)
-    .then(response => 
+    .then(response => {
+        console.log(response.data);
         res.status(200).json({ 
             lookupTransfers: response.data 
-        })
-    )
+        });
+    })
     .catch(err => 
         res.status(400).json({ 
             error: err 

@@ -10,7 +10,7 @@ import ERC20TokenTransfersInfoTable from '../ERC20TokenTransfersInfoTable/ERC20T
 const ERC720HoldingsPage: FC = () => {
     // Set up hooks and state
     const navigate = useNavigate();
-    const walletAddress = useRef<HTMLInputElement>(null);
+    const address = useRef<HTMLInputElement>(null);
     const [alert, updateAlert] = useState<boolean>(false);
     const [emptyAlert, updateEmptyAlert] = useState<boolean>(false);
     const [tokenHoldings, updateTokenHoldings] = useState<ERC20HoldingType[]>(); // An array of these types must be stored in this state
@@ -30,13 +30,13 @@ const ERC720HoldingsPage: FC = () => {
         // Set configuration for request
         let options = {
             method: 'POST',
-            body: JSON.stringify({ walletAddress }),
+            body: JSON.stringify({ walletAddress: address.current?.value }),
             headers: {
                 'content-type': 'application/json'
             }
         }
 
-        if (walletAddress.current?.value.length !== 42 && walletAddress.current?.value.substring(0, 2) !== '0x') {
+        if (address.current?.value.length !== 42 && address.current?.value.substring(0, 2) !== '0x') {
             updateEmptyAlert(false);
             updateAlert(true);
         }
@@ -55,7 +55,11 @@ const ERC720HoldingsPage: FC = () => {
                     updateAlert(false);
                     updateTokenHoldings(response.data.holdings);
                 }
-            });
+            })
+            .catch(() => {
+                updateAlert(true);
+                updateEmptyAlert(false);
+            })
 
             axios.post('http://localhost:5001/get-arb-erc20-transfers', options)
             .then(response => {
@@ -67,6 +71,10 @@ const ERC720HoldingsPage: FC = () => {
                     updateAlert(false);
                     updateTokenTransfers(response.data.transfers);
                 }
+            })
+            .catch(() => {
+                updateAlert(true);
+                updateEmptyAlert(false);
             });
         }
     }
@@ -83,7 +91,7 @@ const ERC720HoldingsPage: FC = () => {
                     <div className="container">
                         <form onSubmit={ walletHandler }>
                             <label style={{ marginRight: '0.5rem' }}>Enter <b>Wallet Address</b> for ERC20 Token Holdings and Transfers: </label>
-                            <input style={{ marginTop: '2rem' }} type="text" placeholder="Enter Wallet Address" required />
+                            <input style={{ marginTop: '2rem' }} ref={address} type="text" placeholder="Enter Wallet Address" required />
                             <br />
                             <button style={{ marginTop: '1rem' }} type="submit" className="btn btn-success">View Holdings</button>
                         </form>
@@ -95,9 +103,9 @@ const ERC720HoldingsPage: FC = () => {
             {
                 tokenHoldings === undefined || emptyAlert || alert ? null :
                     <>
-                        <main style={{ marginTop: '5rem' }} role="main">
+                        <main style={{ marginTop: '5rem' }} className="p-3" role="main">
                             <div style={{ marginTop: '1rem' }} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                                <h3 className="h3">Transactions</h3>
+                                <h3 className="h3">ERC-20 Holdings</h3>
                             </div>
                         </main>
                         <ERC20TokenHoldingsInfoTable data={ tokenHoldings } /> 
@@ -106,12 +114,12 @@ const ERC720HoldingsPage: FC = () => {
             {
                 tokenTransfers === undefined || emptyAlert || alert ? null :
                     <>
-                        <main style={{ marginTop: '5rem' }} role="main">
+                        <main style={{ marginTop: '5rem' }} className="p-3" role="main">
                             <div style={{ marginTop: '1rem' }} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                                <h3 className="h3">Internal Transactions</h3>
+                                <h3 className="h3">ERC-20 Transfers</h3>
                             </div>
                         </main>
-                        <ERC20TokenTransfersInfoTable address={ walletAddress.current!.value } data={ tokenTransfers } /> 
+                        <ERC20TokenTransfersInfoTable address={ address.current!.value } data={ tokenTransfers } /> 
                     </>
             }
         </div>  

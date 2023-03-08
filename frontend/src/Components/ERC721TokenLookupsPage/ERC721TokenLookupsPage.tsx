@@ -9,7 +9,7 @@ import { ERC721TransferLookupType } from '../../utils/types/ERC721TransferLookup
 
 const ERC721TokenLookupsPage: FC = () => {
 
-    const tokenAddress = useRef<HTMLInputElement>(null);    // Initialize ERC721 contract attributes
+    const address = useRef<HTMLInputElement>(null);    // Initialize ERC721 contract attributes
     const tokenID = useRef<HTMLInputElement>(null);
     
     // Adding hooks
@@ -34,13 +34,13 @@ const ERC721TokenLookupsPage: FC = () => {
 
         const options = {
             method: 'POST',
-            body: JSON.stringify({ address: tokenAddress, id: tokenID }),
+            body: JSON.stringify({ address, id: tokenID }),
             headers: {
                 'content-type' : 'application/json', 
             }
         }
 
-        if (tokenAddress.current?.value.length === 42 && tokenAddress.current.value.substring(0, 2) === '0x'){
+        if (address.current?.value.length === 42 && address.current.value.substring(0, 2) === '0x'){
             axios.post('http://localhost:5001/arb-erc721-token-lookup' , options)
             .then(response => {
                 updateAlert(false); // Remove alerts if any exist
@@ -92,7 +92,7 @@ const ERC721TokenLookupsPage: FC = () => {
                 <div className="jumbotron bg-light p-3">                    
                     <form onSubmit={ e => tokenHandler(e) }>
                         <p style={{ marginRight: '0.5rem' }}>Enter <b>ERC721 Contract Address</b> & <b>Token ID</b> for Lookup </p>
-                        <input style={{ marginTop: '1rem' }} ref={ tokenAddress } type="text" placeholder="Enter Contract Address" required />
+                        <input style={{ marginTop: '1rem' }} ref={ address } type="text" placeholder="Enter Contract Address" required />
                         <br />
                         <input style={{ marginTop: '1rem' }} ref={ tokenID } type="number" placeholder="Enter Token ID" required />
                         <br />
