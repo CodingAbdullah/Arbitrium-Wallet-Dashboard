@@ -31,7 +31,7 @@ const WalletAnalyticsResultPage: FC = () => {
             }
 
             // Update transactions state with txns request
-            axios.post('http://localhost:5001/transactions', options)
+            axios.post('http://localhost:5001/arb-transactions', options)
             .then(response => {
                 if (response.data.txns.result.length === 0) {
                     updateEmptyAlert(true);
@@ -44,7 +44,7 @@ const WalletAnalyticsResultPage: FC = () => {
             });
 
             // Update internal transactions state with internal txns request
-            axios.post('http://localhost:5001/internal-transactions', options)
+            axios.post('http://localhost:5001/arb-internal-transactions', options)
             .then(response => {
                 if (response.data.txns.result.length === 0) {
                     updateEmptyAlert(true);

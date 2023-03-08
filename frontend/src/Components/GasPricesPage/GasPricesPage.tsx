@@ -9,7 +9,7 @@ const GasTrackerPage: FC = () => {
     const [gasState, updateGasState] = useState<GasStateType>();
 
     useEffect(() => {
-        axios.get("http://localhost:5001/gas-track")
+        axios.get("http://localhost:5001/arb-gas-track")
         .then(response => {
             // Retrieve gas information
             updateGasState(response.data);

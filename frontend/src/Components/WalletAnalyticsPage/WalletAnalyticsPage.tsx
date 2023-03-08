@@ -53,7 +53,7 @@ const WalletTokenAnalyticsPage: FC = () => {
             }
 
             // Requesting list of transactions
-            axios.post("http://localhost:5001/transactions", options)
+            axios.post("http://localhost:5001/arb-transactions", options)
             .then(response => {
                 if (response.data.txns.result.length === 0) {
                     updateEmptyAlert(true);
@@ -67,7 +67,7 @@ const WalletTokenAnalyticsPage: FC = () => {
             });
 
             // Request list of internal transactions
-            axios.post("http://localhost:5001/internal-transactions", options)
+            axios.post("http://localhost:5001/arb-internal-transactions", options)
             .then(response => {
                 if (response.data.txns.result.length === 0) {
                     updateEmptyAlert(true);

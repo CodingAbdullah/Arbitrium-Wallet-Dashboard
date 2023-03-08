@@ -41,7 +41,7 @@ const ERC721TokenLookupsPage: FC = () => {
         }
 
         if (tokenAddress.current?.value.length === 42 && tokenAddress.current.value.substring(0, 2) === '0x'){
-            axios.post('http://localhost:5001/erc721-token-lookup' , options)
+            axios.post('http://localhost:5001/arb-erc721-token-lookup' , options)
             .then(response => {
                 updateAlert(false); // Remove alerts if any exist
                 updateEmptyAlert(false);
@@ -54,7 +54,7 @@ const ERC721TokenLookupsPage: FC = () => {
                 updateTokenTransfers(undefined);
             });
 
-            axios.post('http://localhost:5001/erc721-token-transfers-lookup', options) // Get transfer data
+            axios.post('http://localhost:5001/arb-erc721-token-transfers-lookup', options) // Get transfer data
             .then(response => {
                     if (response.data.lookupTransfers.result.length === 0){ // If empty, keep state to null
                         updateEmptyAlert(true);
