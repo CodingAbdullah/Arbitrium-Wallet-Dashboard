@@ -19,11 +19,11 @@ const ERC721HoldingsInfoTable = (props: { data: ERC721HoldingType }) => {
                     { data.holdings.result.map((record, key) => {
                         return (
                                 <tr style={{ border: '1px solid black' }}>
-                                    <td style={{ border: '1px solid black' }}>{ record.name }</td>
-                                    <td style={{ border: '1px solid black' }}>{ record.token_address }</td>
-                                    <td style={{ border: '1px solid black' }}>{ record.token_id }</td>
-                                    <td style={{ border: '1px solid black' }}>{ record.symbol }</td>
-                                    <td style={{ border: '1px solid black' }}><a href={ "https://opensea.io/assets/arbitrum/" + record.token_address + "/" + record.token_id } target="_blank" rel="noreferrer">ERC721 Link</a></td>
+                                    <td style={{ border: '1px solid black', fontSize: '11px' }}>{ record.name }</td>
+                                    <td style={{ border: '1px solid black', fontSize: '11px' }}>{ record.token_address }</td>
+                                    <td style={{ border: '1px solid black', fontSize: '11px' }}>{ record.token_id }</td>
+                                    <td style={{ border: '1px solid black', fontSize: '11px' }}>{ record.symbol }</td>
+                                    <td style={{ border: '1px solid black', fontSize: '11px' }}><a href={ "https://opensea.io/assets/arbitrum/" + record.token_address + "/" + record.token_id } target="_blank" rel="noreferrer">ERC721 Link</a></td>
                                 </tr>
                         )
                     })}

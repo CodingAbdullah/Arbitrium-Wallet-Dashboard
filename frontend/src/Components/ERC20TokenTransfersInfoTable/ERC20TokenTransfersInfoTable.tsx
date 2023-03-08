@@ -13,7 +13,7 @@ const ERC720TransfersInfoTable = (props : { data : ERC20TransferType, address: s
                     <th style={{ border: '1px solid black' }} scope="col">From</th>
                     <th style={{ border: '1px solid black' }} scope="col">To</th>
                     { address !== null ? <th style={{ border: '1px solid black' }} scope="col">Direction</th> : null }                   
-                    <th style={{ border: '1px solid black' }} scope="col">Value In WEI</th>
+                    <th style={{ border: '1px solid black' }} scope="col">ERC-20 Quantity</th>
                 </tr>
                 </thead>
                 <tbody>

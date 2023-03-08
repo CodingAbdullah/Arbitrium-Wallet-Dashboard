@@ -15,7 +15,7 @@ const ERC721TokenHoldingsPage: FC = () => {
     const [erc721HoldingData, updateERC721HoldingData] = useState<ERC721HoldingType>();
     const [erc721TransferData, updateERC721TransferData] = useState<ERC721TransferType>();
 
-    const address = useRef<HTMLInputElement>();
+    const address = useRef<HTMLInputElement>(null);
     const navigate = useNavigate();
 
     
@@ -39,7 +39,7 @@ const ERC721TokenHoldingsPage: FC = () => {
 
             const options = {
                 method: 'POST',
-                body: JSON.stringify({ address }),
+                body: JSON.stringify({ walletAddress: address.current?.value }),
                 headers : {
                     'content-type': 'application/json'
                 }
@@ -56,7 +56,11 @@ const ERC721TokenHoldingsPage: FC = () => {
                     updateEmptyAlert(false);
                     updateERC721HoldingData(response.data);
                 }
-            });
+            })
+            .catch(() => {
+                updateAlert(true);
+                updateEmptyAlert(false);
+            })
 
             axios.post('http://localhost:5001/get-arb-erc721-transfers', options)
             .then(response => {
@@ -68,7 +72,11 @@ const ERC721TokenHoldingsPage: FC = () => {
                     updateEmptyAlert(false);
                     updateERC721TransferData(response.data);
                 }
-            });
+            })
+            .catch(() => {
+                updateAlert(true);
+                updateEmptyAlert(false);
+            })
         }
     }
     
@@ -84,7 +92,7 @@ const ERC721TokenHoldingsPage: FC = () => {
                     <div className="container">
                         <form onSubmit={ (e) => formHandler(e) }>
                             <label>Enter <b>Wallet Address</b> for list of ERC-721 Holdings and Transfers:</label>
-                            <input style={{ marginLeft: '0.5rem' }} type='text' placeholder='Enter Wallet Address' />
+                            <input style={{ marginLeft: '0.5rem' }} ref={address} type='text' placeholder='Enter Wallet Address' />
                             <br />
                             <button style={{ marginTop: '1rem' }} type='submit' className='btn btn-success'>View Holdings</button>
                         </form>
@@ -99,7 +107,7 @@ const ERC721TokenHoldingsPage: FC = () => {
                         <main className="p-3" role="main">
                                 <div>
                                     {
-                                        erc721HoldingData === undefined ? null :
+                                        erc721HoldingData === undefined || emptyAlert || alert ? null :
                                             <>
                                                 <main style={{ marginTop: '5rem' }} role="main">
                                                     <div style={{ marginTop: '1rem' }} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -114,11 +122,11 @@ const ERC721TokenHoldingsPage: FC = () => {
                         <main className="p-3" role="main">
                             <div>
                                 {
-                                    erc721TransferData === undefined ? null :
+                                    erc721TransferData === undefined || emptyAlert || alert ? null :
                                         <>
                                             <main style={{ marginTop: '5rem' }} role="main">
                                                 <div style={{ marginTop: '1rem' }} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                                                    <h3 className="h3">Sample ERC-721 Transfers</h3>
+                                                    <h3 className="h3">ERC-721 Transfers</h3>
                                                 </div>
                                             </main>
                                             <ERC721TransfersInfoTable address={ address.current!.value } data={ erc721TransferData } />
