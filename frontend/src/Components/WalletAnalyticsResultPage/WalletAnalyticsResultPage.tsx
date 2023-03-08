@@ -56,39 +56,42 @@ const WalletAnalyticsResultPage: FC = () => {
             });
         }
     }, []);
-        
-        if (walletInternalTransactionState !== undefined && walletTransactionState !== undefined) {
-            localStorage.clear(); // Clear localStorage once data has been collected
+
+        if (walletInternalTransactionState === undefined || walletTransactionState || undefined) {
+            return <div>Loading...</div>
         }
-        return (
-            <div className="wallet-analytics-result-page p-3">
-                <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 className="h2">Wallet Analytics</h1>
+        else  {
+            localStorage.clear(); // Clear localStorage once data has been collected
+            return (
+                <div className="wallet-analytics-result-page p-3">
+                    <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 className="h2">Wallet Analytics</h1>
+                    </div>
+                        { 
+                            emptyAlert ? <Alert type="warning" /> : 
+                            <>
+                                {
+                                    walletTransactionState === undefined ||  walletInternalTransactionState === undefined || emptyAlert ? null :
+                                        <>
+                                            <main style={{ marginTop: '5rem' }} role="main">
+                                                <div style={{ marginTop: '1rem' }} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                                                    <h3 className="h3">Transactions</h3>
+                                                </div>
+                                            </main>
+                                            <WalletTransactionsInfoTable address={ address! } data={ walletTransactionState! } /> 
+                                            <main style={{ marginTop: '5rem' }} role="main">
+                                                <div style={{ marginTop: '1rem' }} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                                                    <h3 className="h3">Internal Transactions</h3>
+                                                </div>
+                                            </main>
+                                            <WalletInternalTransactionsInfoTable address={ address! } data={ walletInternalTransactionState! } /> 
+                                        </>
+                                } 
+                            </>
+                        }
                 </div>
-                    { 
-                        emptyAlert ? <Alert type="warning" /> : 
-                        <>
-                            {
-                                walletTransactionState === undefined ||  walletInternalTransactionState === undefined || emptyAlert ? null :
-                                    <>
-                                        <main style={{ marginTop: '5rem' }} role="main">
-                                            <div style={{ marginTop: '1rem' }} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                                                <h3 className="h3">Transactions</h3>
-                                            </div>
-                                        </main>
-                                        <WalletTransactionsInfoTable address={ address! } data={ walletTransactionState! } /> 
-                                        <main style={{ marginTop: '5rem' }} role="main">
-                                            <div style={{ marginTop: '1rem' }} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                                                <h3 className="h3">Internal Transactions</h3>
-                                            </div>
-                                        </main>
-                                        <WalletInternalTransactionsInfoTable address={ address! } data={ walletInternalTransactionState! } /> 
-                                    </>
-                            } 
-                        </>
-                    }
-            </div>
-        )
+            )
+        }
 }
 
 export default WalletAnalyticsResultPage

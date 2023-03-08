@@ -53,7 +53,8 @@ const ERC721TokenHoldingsPage: FC = () => {
                     updateEmptyAlert(true);
                 }
                 else {
-                    updateERC721HoldingData(response.data.holdings);
+                    updateEmptyAlert(false);
+                    updateERC721HoldingData(response.data);
                 }
             });
 
@@ -64,7 +65,8 @@ const ERC721TokenHoldingsPage: FC = () => {
                     updateEmptyAlert(true);
                 }
                 else {
-                    updateERC721TransferData(response.data.transfers);
+                    updateEmptyAlert(false);
+                    updateERC721TransferData(response.data);
                 }
             });
         }
@@ -99,8 +101,8 @@ const ERC721TokenHoldingsPage: FC = () => {
                                     {
                                         erc721HoldingData === undefined ? null :
                                             <>
-                                                <main style={{marginTop: '5rem'}} role="main">
-                                                    <div style={{marginTop: '1rem'}} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                                                <main style={{ marginTop: '5rem' }} role="main">
+                                                    <div style={{ marginTop: '1rem' }} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                                                         <h3 className="h3">ERC-721 Token Holdings</h3>
                                                     </div>
                                                 </main>
@@ -114,8 +116,8 @@ const ERC721TokenHoldingsPage: FC = () => {
                                 {
                                     erc721TransferData === undefined ? null :
                                         <>
-                                            <main style={{marginTop: '5rem'}} role="main">
-                                                <div style={{marginTop: '1rem'}} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                                            <main style={{ marginTop: '5rem' }} role="main">
+                                                <div style={{ marginTop: '1rem' }} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                                                     <h3 className="h3">Sample ERC-721 Transfers</h3>
                                                 </div>
                                             </main>

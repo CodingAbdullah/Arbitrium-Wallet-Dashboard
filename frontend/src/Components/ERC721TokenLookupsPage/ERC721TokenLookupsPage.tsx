@@ -1,36 +1,94 @@
 import { FC, FormEvent, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import Alert from '../Alert/Alert';
+import ERC721LookupsInfoTable from '../ERC721LookupsInfoTable/ERC721LookupsInfoTable';
+import ERC721TransferLookupsInfoTable from '../ERC721TransferLookupsInfoTable/ERC721TransferLookupsInfoTable';
+import axios from 'axios';
+import { ERC721LookupType } from '../../utils/types/ERC721LookupType';
+import { ERC721TransferLookupType } from '../../utils/types/ERC721TransferLookupType';
 
-const ERC721LookupsPage: FC = () => {
+const ERC721TokenLookupsPage: FC = () => {
+
+    const tokenAddress = useRef<HTMLInputElement>(null);    // Initialize ERC721 contract attributes
+    const tokenID = useRef<HTMLInputElement>(null);
+    
     // Adding hooks
     const [alert, updateAlert] = useState<boolean>(false);
-    const tokenAddress = useRef<HTMLInputElement>(null);
-    const tokenID = useRef<HTMLInputElement>(null);
+    const [emptyAlert, updateEmptyAlert] = useState<boolean>(false);
+
+    const [tokenData, updateTokenData] = useState<ERC721LookupType>();
+    const [tokenTransfers, updateTokenTransfers] = useState<ERC721TransferLookupType>();
 
     const navigate = useNavigate();
 
-    // Clear and Form handlers
+    // Clear function to remove state and data
     const clearHandler = () => {
+        updateTokenData(undefined);
+        updateTokenTransfers(undefined);
         updateAlert(false);
+        updateEmptyAlert(false);
     }
 
     const tokenHandler = (e: FormEvent<HTMLFormElement>) => {
-        // Check token address length and structure 
-        e.preventDefault();
+        e.preventDefault(); // Prevent Default Behaviour
 
-        if (tokenAddress.current?.value === null ||  tokenAddress.current?.value.length !== 42 || tokenAddress.current.value.substring(0, 2) !== '0x') {
+        const options = {
+            method: 'POST',
+            body: JSON.stringify({ address: tokenAddress, id: tokenID }),
+            headers: {
+                'content-type' : 'application/json', 
+            }
+        }
+
+        if (tokenAddress.current?.value.length === 42 && tokenAddress.current.value.substring(0, 2) === '0x'){
+            axios.post('http://localhost:5001/erc721-token-lookup' , options)
+            .then(response => {
+                updateAlert(false); // Remove alerts if any exist
+                updateEmptyAlert(false);
+                updateTokenData(response.data);
+            })
+            .catch(() => {
+                updateAlert(true);
+                updateEmptyAlert(false);
+                updateTokenData(undefined);
+                updateTokenTransfers(undefined);
+            });
+
+            axios.post('http://localhost:5001/erc721-token-transfers-lookup', options) // Get transfer data
+            .then(response => {
+                    if (response.data.lookupTransfers.result.length === 0){ // If empty, keep state to null
+                        updateEmptyAlert(true);
+                        updateAlert(false);
+                    }
+                    else {
+                        updateEmptyAlert(false);
+                        updateAlert(false);
+                        updateTokenTransfers(response.data);
+                    }
+            })
+            .catch(() => {
+                updateAlert(true);
+                updateEmptyAlert(false);
+                updateTokenData(undefined);
+                updateTokenTransfers(undefined);        
+            })
+        }
+        else {
             updateAlert(true);
+            updateEmptyAlert(false);
+            updateTokenData(undefined);
+            updateTokenTransfers(undefined);
         }
     }
 
     return (
         <div>
-             <main role="main" className="p-3">
+            <main role="main" className="p-3">
                 <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h2>ERC-721 Token Lookup</h2>
                 </div>
                 { alert ? <Alert type="danger" /> : null }
+                { emptyAlert ? <Alert type="warning" /> : null }
                 <div className="jumbotron bg-light p-3">                    
                     <form onSubmit={ e => tokenHandler(e) }>
                         <p style={{ marginRight: '0.5rem' }}>Enter <b>ERC721 Contract Address</b> & <b>Token ID</b> for Lookup </p>
@@ -44,8 +102,38 @@ const ERC721LookupsPage: FC = () => {
                     <button style={{ marginTop: '2rem', marginLeft: '2rem' }} className='btn btn-warning' onClick={ clearHandler }>Clear</button>
                 </div>
             </main>
+            <main className="p-3" role="main">
+                <div>
+                    {
+                        tokenData === undefined  ? null :
+                            <>
+                                <main style={{ marginTop: '5rem' }} role="main">
+                                    <div style={{ marginTop: '1rem' }} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                                        <h3 className="h3">ERC721 Token Lookup Information</h3>
+                                    </div>
+                                </main>
+                                <ERC721LookupsInfoTable data = { tokenData! }/>                                
+                            </>
+                    }
+                </div>
+            </main>
+            <main className="p-3" role="main">
+                    <div>
+                        {
+                            tokenTransfers === undefined ? null :
+                                <>
+                                    <main style={{marginTop: '5rem'}} role="main">
+                                        <div style={{marginTop: '1rem'}} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                                            <h3 className="h3">ERC721 Token Transfers</h3>
+                                        </div>
+                                    </main>
+                                    <ERC721TransferLookupsInfoTable data={ tokenTransfers! } />
+                                </>
+                        }
+                    </div>
+            </main>
         </div>
     )
 }
 
-export default ERC721LookupsPage;
+export default ERC721TokenLookupsPage;

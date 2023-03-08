@@ -8,12 +8,12 @@ const ERC20TokenHoldingsInfoTable = (props : { data: ERC20HoldingType[] }) => {
         <div style={{ overflowX: 'scroll', paddingBottom: '2rem' }}>
             <table style={{ border: '1px solid black' }}>
                 <thead style={{ border: '1px solid black' }}>
-                <tr style={{ border: '1px solid black' }}>
-                    <th style={{ border: '1px solid black' }} scope="col">Name</th>
-                    <th style={{ border: '1px solid black' }} scope="col">Token Address</th>
-                    <th style={{ border: '1px solid black' }} scope="col">Symbol</th>
-                    <th style={{ border: '1px solid black' }} scope="col">Balance</th>
-                </tr>
+                    <tr style={{ border: '1px solid black' }}>
+                        <th style={{ border: '1px solid black' }} scope="col">Name</th>
+                        <th style={{ border: '1px solid black' }} scope="col">Token Address</th>
+                        <th style={{ border: '1px solid black' }} scope="col">Symbol</th>
+                        <th style={{ border: '1px solid black' }} scope="col">Balance</th>
+                    </tr>
                 </thead>
                 <tbody>
                     { data.map((record, key) => {
