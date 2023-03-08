@@ -57,7 +57,7 @@ const WalletAnalyticsResultPage: FC = () => {
         }
     }, []);
 
-        if (walletInternalTransactionState === undefined || walletTransactionState || undefined) {
+        if (walletInternalTransactionState === undefined || walletTransactionState === undefined) {
             return <div>Loading...</div>
         }
         else  {

@@ -79,7 +79,7 @@ const ERC720HoldingsPage: FC = () => {
                 </div>
                 { alert ? <Alert type="danger" /> : null }
                 { emptyAlert ? <Alert type="warning" /> : null }
-                <div className="jumbotron bg-light">
+                <div className="jumbotron bg-light p-3">
                     <div className="container">
                         <form onSubmit={ walletHandler }>
                             <label style={{ marginRight: '0.5rem' }}>Enter <b>Wallet Address</b> for ERC20 Token Holdings and Transfers: </label>
