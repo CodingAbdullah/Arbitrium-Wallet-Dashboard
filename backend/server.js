@@ -2,11 +2,11 @@ require("dotenv").config({ path: '.env' });
 const express = require("express");
 const app = express();
 const cors = require('cors');
-const ERC20HoldingsRoute = require('./routes/ERC20HoldingsRoute');
-const ERC721HoldingsRoute = require("./routes/ERC721HoldingsRoute");
-const ERC721LookupsRoute = require('./routes/ERC721LookupsRoute');
-const GasTrackerRoute = require("./routes/GasRoute");
-const WalletRoute = require("./routes/WalletRoute");
+const ArbERC20HoldingsRoute = require('./routes/ArbERC20HoldingsRoute');
+const ArbERC721HoldingsRoute = require("./routes/ArbERC721HoldingsRoute");
+const ArbERC721LookupsRoute = require('./routes/ArbERC721LookupsRoute');
+const ArbGasTrackerRoute = require("./routes/ArbGasRoute");
+const ArbWalletRoute = require("./routes/ArbWalletRoute");
 
 // Spinning up a node server
 app.listen(process.env.PORT || 8080, () => {
@@ -19,11 +19,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json({ extended: false }));
 
 // Add Routes
-app.use("/", ERC721HoldingsRoute);
-app.use("/", ERC20HoldingsRoute);
-app.use("/", ERC721LookupsRoute);
-app.use("/", GasTrackerRoute);
-app.use("/", WalletRoute);
+app.use("/", ArbERC721HoldingsRoute);
+app.use("/", ArbERC20HoldingsRoute);
+app.use("/", ArbERC721LookupsRoute);
+app.use("/", ArbGasTrackerRoute);
+app.use("/", ArbWalletRoute);
 
 // ERC-721 Holdings, Transfers
 // ERC-721 Lookups (Arbitrum)
