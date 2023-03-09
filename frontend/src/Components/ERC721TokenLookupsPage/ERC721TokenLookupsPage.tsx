@@ -34,7 +34,7 @@ const ERC721TokenLookupsPage: FC = () => {
 
         const options = {
             method: 'POST',
-            body: JSON.stringify({ address, id: tokenID }),
+            body: JSON.stringify({ walletAddress: address.current?.value, id: tokenID.current?.value }),
             headers: {
                 'content-type' : 'application/json', 
             }
@@ -48,10 +48,7 @@ const ERC721TokenLookupsPage: FC = () => {
                 updateTokenData(response.data);
             })
             .catch(() => {
-                updateAlert(true);
-                updateEmptyAlert(false);
-                updateTokenData(undefined);
-                updateTokenTransfers(undefined);
+                updateEmptyAlert(true);
             });
 
             axios.post('http://localhost:5001/arb-erc721-token-transfers-lookup', options) // Get transfer data
@@ -67,17 +64,11 @@ const ERC721TokenLookupsPage: FC = () => {
                     }
             })
             .catch(() => {
-                updateAlert(true);
-                updateEmptyAlert(false);
-                updateTokenData(undefined);
-                updateTokenTransfers(undefined);        
-            })
+                updateEmptyAlert(true);       
+            });
         }
         else {
             updateAlert(true);
-            updateEmptyAlert(false);
-            updateTokenData(undefined);
-            updateTokenTransfers(undefined);
         }
     }
 
@@ -105,7 +96,7 @@ const ERC721TokenLookupsPage: FC = () => {
             <main className="p-3" role="main">
                 <div>
                     {
-                        tokenData === undefined  ? null :
+                        tokenData === undefined || alert || emptyAlert ? null :
                             <>
                                 <main style={{ marginTop: '5rem' }} role="main">
                                     <div style={{ marginTop: '1rem' }} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -120,7 +111,7 @@ const ERC721TokenLookupsPage: FC = () => {
             <main className="p-3" role="main">
                     <div>
                         {
-                            tokenTransfers === undefined ? null :
+                            tokenTransfers === undefined || alert || emptyAlert ? null :
                                 <>
                                     <main style={{marginTop: '5rem'}} role="main">
                                         <div style={{marginTop: '1rem'}} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
