@@ -5,7 +5,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 <br />
 
-The AWS Amplify link to this dashboard will be provided here when the project completes.
+### `AWS Amplify`
+
+**The link to the deployed site is here:** [AWS Amplify](https://arbitrum-aws.d1i5adqmyft713.amplifyapp.com/). Note that the backend endpoints were served using the **same** EC2 instance used to serve the backend endpoints for the main **Dashboard** project.
+
+This was done for cost-effectiveness and efficiency. One server holding all the endpoints.
 
 <br />
 
