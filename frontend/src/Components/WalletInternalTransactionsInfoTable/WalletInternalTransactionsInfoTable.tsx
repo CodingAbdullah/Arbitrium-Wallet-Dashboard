@@ -23,7 +23,7 @@ const TransactionsInfoTable = (props: { data: WalletInternalTransactionType, add
                             data.result.map((record, key) => {
                                 return (
                                     <tr style={{ border: '1px solid black'}}>
-                                        <td style={{ border: '1px solid black', fontSize: '11px' }}>{record.blockNumber}</td>
+                                        <td style={{ border: '1px solid black', fontSize: '11px', padding: '0.5rem' }}>{record.blockNumber}</td>
                                         <td style={{ border: '1px solid black', fontSize: '11px' }}>{new Date(Number(record.timeStamp)*1000).toString().split("GMT")[0].trim() +"-EST"}</td>
                                         <td style={{ border: '1px solid black', fontSize: '11px' }}>{record.from}</td>
                                         <td style={{ border: '1px solid black', fontSize: '11px' }}>{record.to}</td>

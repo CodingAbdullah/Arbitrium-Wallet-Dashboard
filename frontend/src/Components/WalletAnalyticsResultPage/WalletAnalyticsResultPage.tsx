@@ -6,6 +6,8 @@ import WalletInternalTransactionsInfoTable from '../WalletInternalTransactionsIn
 import axios from 'axios';
 import { WalletTransactionType } from '../../utils/types/WalletTransactionType';
 import { WalletInternalTransactionType } from '../../utils/types/WalletInternalTransactionType';
+import { WalletBalanceType } from '../../utils/types/WalletBalanceType';
+import WalletBalanceSection from '../WalletBalanceSection/WalletBalanceSection';
 
 const WalletAnalyticsResultPage: FC = () => {
     const navigate = useNavigate();
@@ -13,6 +15,7 @@ const WalletAnalyticsResultPage: FC = () => {
 
     const [walletTransactionState, updateWalletTransactionState] = useState<WalletTransactionType>();
     const [walletInternalTransactionState, updateWalletInternalTransactionState] = useState<WalletInternalTransactionType>();
+    const [walletBalanceInformationState, updateWalletBalanceInformationState] = useState<WalletBalanceType>();
 
     let address = localStorage.getItem('walletAddress') === null ? "" : localStorage.getItem('walletAddress');
 
@@ -24,7 +27,7 @@ const WalletAnalyticsResultPage: FC = () => {
         else {
             let options = {
                 method: "GET",
-                body: JSON.stringify({ address }),
+                body: JSON.stringify({ walletAddress: address }),
                 headers : {
                     'content-type' : 'application/json'
                 }
@@ -38,9 +41,12 @@ const WalletAnalyticsResultPage: FC = () => {
                 }
                 else {
                     updateEmptyAlert(false);
-                    updateWalletTransactionState(response.data.txns.result);
+                    updateWalletTransactionState(response.data.txns);
 
                 }
+            })
+            .catch(() => {
+                updateEmptyAlert(true);
             });
 
             // Update internal transactions state with internal txns request
@@ -51,17 +57,25 @@ const WalletAnalyticsResultPage: FC = () => {
                 }
                 else {
                     updateEmptyAlert(false);
-                    updateWalletInternalTransactionState(response.data.txns.result);
+                    updateWalletInternalTransactionState(response.data.txns);
                 }
+            })
+            .catch(() => {
+                updateEmptyAlert(true);
+            });
+
+            // Get ETH price along with wallet balance information
+            axios.post('http://localhost:5001/arb-wallet-balance', options)
+            .then(response => {
+                updateWalletBalanceInformationState(response.data);  
             });
         }
     }, []);
 
-        if (walletInternalTransactionState === undefined || walletTransactionState === undefined) {
+        if (walletInternalTransactionState === undefined && walletTransactionState === undefined && walletBalanceInformationState === undefined && !emptyAlert) {
             return <div>Loading...</div>
         }
-        else  {
-            localStorage.clear(); // Clear localStorage once data has been collected
+        else {
             return (
                 <div className="wallet-analytics-result-page p-3">
                     <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -71,8 +85,9 @@ const WalletAnalyticsResultPage: FC = () => {
                             emptyAlert ? <Alert type="warning" /> : 
                             <>
                                 {
-                                    walletTransactionState === undefined ||  walletInternalTransactionState === undefined || emptyAlert ? null :
-                                        <>
+                                    walletTransactionState === undefined ||  walletInternalTransactionState === undefined || walletBalanceInformationState == undefined || emptyAlert ? null :
+                                        <>     
+                                            <WalletBalanceSection data={ walletBalanceInformationState } address={ address! } />
                                             <main style={{ marginTop: '5rem' }} role="main">
                                                 <div style={{ marginTop: '1rem' }} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                                                     <h3 className="h3">Transactions</h3>

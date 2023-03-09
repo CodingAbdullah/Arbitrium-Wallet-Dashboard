@@ -19,7 +19,7 @@ const ERC721HoldingsInfoTable = (props: { data: ERC721HoldingType }) => {
                     { data.holdings.result.map((record, key) => {
                         return (
                                 <tr style={{ border: '1px solid black' }}>
-                                    <td style={{ border: '1px solid black', fontSize: '11px' }}>{ record.name }</td>
+                                    <td style={{ border: '1px solid black', fontSize: '11px', padding: '0.5rem' }}>{ record.name }</td>
                                     <td style={{ border: '1px solid black', fontSize: '11px' }}>{ record.token_address }</td>
                                     <td style={{ border: '1px solid black', fontSize: '11px' }}>{ record.token_id }</td>
                                     <td style={{ border: '1px solid black', fontSize: '11px' }}>{ record.symbol }</td>

@@ -25,7 +25,7 @@ const ERC720TransfersInfoTable = (props : { data : ERC20TransferType, address: s
 
                             return (
                                 <tr style={{ border: '1px solid black' }}>
-                                    <td style={{ border: '1px solid black' }}>{ record.block_timestamp.split("T")[0] }</td>
+                                    <td style={{ border: '1px solid black', padding: '0.5rem' }}>{ record.block_timestamp.split("T")[0] }</td>
                                     <td style={{ border: '1px solid black' }}>{ record.from_address }</td>
                                     <td style={{ border: '1px solid black' }}>{ record.to_address }</td>
                                     { 

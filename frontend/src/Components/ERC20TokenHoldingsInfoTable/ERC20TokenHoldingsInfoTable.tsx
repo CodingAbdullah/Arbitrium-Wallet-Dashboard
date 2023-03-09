@@ -24,7 +24,7 @@ const ERC20TokenHoldingsInfoTable = (props : { data: ERC20HoldingType[] }) => {
                         else {
                             return (
                                 <tr style={{ border: '1px solid black' }}>
-                                    <td style={{ border: '1px solid black' }}>{ record.name }</td>
+                                    <td style={{ border: '1px solid black', padding: '0.5rem' }}>{ record.name }</td>
                                     <td style={{ border: '1px solid black' }}>{ record.token_address }</td>
                                     <td style={{ border: '1px solid black' }}>{ record.symbol }</td>
                                     <td style={{ border: '1px solid black' }}>{ Number(record.balance)/1000000000000000000 }</td>

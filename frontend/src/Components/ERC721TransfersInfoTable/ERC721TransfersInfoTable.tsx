@@ -22,7 +22,7 @@ const ERC721TransfersInfoTable = (props : { data: ERC721TransferType, address: s
                         // Display information, format date display
                             return (
                                 <tr style={{ border: '1px solid black'}}>
-                                    <td style={{ border: '1px solid black', fontSize: '11px' }}>{ record.block_timestamp.split("T")[0] }</td>
+                                    <td style={{ border: '1px solid black', fontSize: '11px', padding: '0.5rem' }}>{ record.block_timestamp.split("T")[0] }</td>
                                     <td style={{ border: '1px solid black', fontSize: '11px' }}>{ record.token_address }</td>
                                     <td style={{ border: '1px solid black', fontSize: '11px' }}>{ record.token_id }</td>
                                     <td style={{ border: '1px solid black', fontSize: '11px' }}>{ address.toLowerCase() === record.to_address ? <Badge type="IN" /> : <Badge type="OUT" /> }</td>

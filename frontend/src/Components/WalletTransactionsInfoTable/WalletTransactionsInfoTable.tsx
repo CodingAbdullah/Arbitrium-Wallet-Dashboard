@@ -23,13 +23,13 @@ const TransactionsInfoTable = (props: { data: WalletTransactionType, address: st
                             data.result.map((record, key) => {
                                 return (
                                     <tr style={{ border: '1px solid black' }}>
-                                        <td style={{ border: '1px solid black', fontSize: '11px' }}>{record.blockNumber}</td>
-                                        <td style={{ border: '1px solid black', fontSize: '11px' }}>{new Date(Number(record.timeStamp)*1000).toString().split("GMT")[0].trim() +"-EST"}</td>
-                                        <td style={{ border: '1px solid black', fontSize: '11px' }}>{record.from}</td>
-                                        <td style={{ border: '1px solid black', fontSize: '11px' }}>{record.to}</td>
-                                        <td style={{ border: '1px solid black', fontSize: '11px' }}>{ address.toLowerCase() === record.to ? <Badge type="IN" /> : <Badge type="OUT" /> }</td>
-                                        <td style={{ border: '1px solid black', fontSize: '11px' }}>{(Number(record.value)*(1/1000000000000000000)).toPrecision(4) + " ETH"}</td>
-                                        <td style={{ border: '1px solid black', fontSize: '11px' }}>{record.gas}</td>
+                                        <td style={{ border: '1px solid black', fontSize: '11px', padding: '0.5rem' }}>{ record.blockNumber }</td>
+                                        <td style={{ border: '1px solid black', fontSize: '11px' }}>{ new Date(Number(record.timeStamp)*1000).toString().split("GMT")[0].trim() +"-EST" }</td>
+                                        <td style={{ border: '1px solid black', fontSize: '11px' }}>{ record.from }</td>
+                                        <td style={{ border: '1px solid black', fontSize: '11px' }}>{ record.to }</td>
+                                        <td style={{ border: '1px solid black', fontSize: '11px' }}>{ address.toLowerCase() === (record.to).toLowerCase() ? <Badge type="IN" /> : <Badge type="OUT" /> }</td>
+                                        <td style={{ border: '1px solid black', fontSize: '11px' }}>{ ( Number(record.value)*(1/1000000000000000000) ).toPrecision(4) + " ETH" }</td>
+                                        <td style={{ border: '1px solid black', fontSize: '11px' }}>{ record.gas }</td>
                                     </tr>
                                 )
                             }) 

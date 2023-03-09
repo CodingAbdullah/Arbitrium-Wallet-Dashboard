@@ -6,6 +6,8 @@ import WalletInternalTransactionsInfoTable from '../../Components/WalletInternal
 import { WalletTransactionType } from '../../utils/types/WalletTransactionType';
 import { WalletInternalTransactionType } from '../../utils/types/WalletInternalTransactionType';
 import axios from 'axios';
+import WalletBalanceSection from '../WalletBalanceSection/WalletBalanceSection';
+import { WalletBalanceType } from '../../utils/types/WalletBalanceType';
 
 const WalletTokenAnalyticsPage: FC = () => {
     // Set hooks and state
@@ -16,6 +18,7 @@ const WalletTokenAnalyticsPage: FC = () => {
 
     const [walletTransactionState, updateWalletTransactionState] = useState<WalletTransactionType>();
     const [walletInternalTransactionState, updateInternalTransactionState] = useState<WalletInternalTransactionType>();
+    const [walletBalanceInformationState, updateWalletBalanceInformationState] = useState<WalletBalanceType>();
 
     const styles = {
         paragraphSpace: {
@@ -31,6 +34,7 @@ const WalletTokenAnalyticsPage: FC = () => {
         updateEmptyAlert(false);
         updateInternalTransactionState(undefined);
         updateWalletTransactionState(undefined);
+        updateWalletBalanceInformationState(undefined);
     }
 
     const formHandler = (e: FormEvent<HTMLFormElement>) => {
@@ -46,7 +50,7 @@ const WalletTokenAnalyticsPage: FC = () => {
             // Adding options to request body
             let options = {
                 method: 'POST',
-                body: JSON.stringify({ address }),
+                body: JSON.stringify({ walletAddress: address.current?.value }),
                 headers: {
                     'content-type' : 'application/json'
                 }
@@ -60,7 +64,7 @@ const WalletTokenAnalyticsPage: FC = () => {
                     updateAlert(false);
                 }
                 else {
-                    updateWalletTransactionState(response.data.txns.result);
+                    updateWalletTransactionState(response.data.txns);
                     updateEmptyAlert(false);
                     updateAlert(false);
                 }
@@ -74,10 +78,16 @@ const WalletTokenAnalyticsPage: FC = () => {
                     updateAlert(false);
                 }
                 else {
-                    updateInternalTransactionState(response.data.txns.result);
+                    updateInternalTransactionState(response.data.txns);
                     updateEmptyAlert(false);
                     updateAlert(false);
                 }
+            });
+
+            // Get Eth price along with wallet balance information
+            axios.post('http://localhost:5001/arb-wallet-balance', options)
+            .then(response => {
+                updateWalletBalanceInformationState(response.data);  
             });
         }
     }
@@ -87,6 +97,7 @@ const WalletTokenAnalyticsPage: FC = () => {
             <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 className="h2">Wallet Analytics</h1>
             </div>
+            
             { setAlert ? <Alert type="danger" /> : null } 
             { emptyAlert ? <Alert type="warning" /> : null } 
             <main role="main" className=" bg-light">
@@ -106,11 +117,15 @@ const WalletTokenAnalyticsPage: FC = () => {
                 </div>
             </main>
             {
+                walletBalanceInformationState === undefined || emptyAlert || setAlert ? null : 
+                <WalletBalanceSection data={ walletBalanceInformationState } address={ address.current!.value } />
+            }
+            {
                 walletTransactionState === undefined || emptyAlert || setAlert ? null :
                     <>
                         <main style={{ marginTop: '5rem' }} role="main">
                             <div style={{ marginTop: '1rem' }} className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                                <h3 className="h3">Transactions</h3>
+                                <h3 className="h3">Transactions (Limited to 1000)</h3>
                             </div>
                         </main>
                         <WalletTransactionsInfoTable address={ address.current!.value } data={ walletTransactionState } /> 
