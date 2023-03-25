@@ -12,11 +12,13 @@ import ERC721LookupsPage from './Components/ERC721TokenLookupsPage/ERC721TokenLo
 import ERC720HoldingsPage from './Components/ERC20TokenHoldingsPage/ERC20TokenHoldingsPage';
 import GasTrackerPage from './Components/GasPricesPage/GasPricesPage';
 import WalletAnalyticsResultPage from './Components/WalletAnalyticsResultPage/WalletAnalyticsResultPage';
+import MetricsNavbar from './Components/MetricsNavbar/MetricsNavbar';
 
 const App: React.FC = () => {
   return (
     <div className="App">
       <Navbar />
+      <MetricsNavbar />
       <Router>
         <Routes>
           <Route path="/about" element={<AboutPage />}></Route>
