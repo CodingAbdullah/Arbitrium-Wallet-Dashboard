@@ -30,6 +30,9 @@ const Navbar: React.FC = () => {
                                 <a className="nav-link" style={{ color: 'white' }} href="/gas-tracker">Gas Station</a>
                             </li>
                             <li className="nav-item">
+                                <a className="nav-link" style={{ color: 'white' }} href="/arb-price-lookup">ARB Price Lookup</a>
+                            </li>
+                            <li className="nav-item">
                                 <a className="nav-link" style={{ color: 'white' }} href="/wallet-analytics">Wallet Analytics</a>
                             </li>
                         </ul>
