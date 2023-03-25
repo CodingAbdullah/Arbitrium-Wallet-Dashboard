@@ -7,7 +7,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### `Arbitrum Airdrop` 
 
-***As of March 22, 2023, Arbitrum launched their own airdrop as part of Governance/DAO. Therefore, a section for price lookup and price metric bar will be added soon.*** 
+***As of March 22, 2023, Arbitrum launched their own airdrop as part of Governance/DAO. Therefore, a section for price lookup and price metric bar HAS BEEN ADDED.*** 
 
 <br />
 
