@@ -13,6 +13,7 @@ import ERC720HoldingsPage from './Components/ERC20TokenHoldingsPage/ERC20TokenHo
 import GasTrackerPage from './Components/GasPricesPage/GasPricesPage';
 import WalletAnalyticsResultPage from './Components/WalletAnalyticsResultPage/WalletAnalyticsResultPage';
 import MetricsNavbar from './Components/MetricsNavbar/MetricsNavbar';
+import ArbPriceLookupPage from './Components/ArbPriceLookupPage/ArbPriceLookupPage';
 
 const App: React.FC = () => {
   return (
@@ -22,6 +23,7 @@ const App: React.FC = () => {
       <Router>
         <Routes>
           <Route path="/about" element={<AboutPage />}></Route>
+          <Route path="/arb-price-lookup" element={<ArbPriceLookupPage />}></Route>
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/erc20-token-holdings" element={<ERC720HoldingsPage />}></Route>
           <Route path="/erc721-token-holdings" element={<ERC721TokenHoldingsPage />}></Route>
