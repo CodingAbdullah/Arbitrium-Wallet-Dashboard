@@ -1,0 +1,4 @@
+#Files to not be considered for when creating the Docker image for the front end server
+.git
+Dockerfile
+node_modules
