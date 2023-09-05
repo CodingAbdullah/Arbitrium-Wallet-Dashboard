@@ -49,7 +49,7 @@ const AboutPage: React.FC = () => {
                     <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                             <p className="p-1">
                                 If you are interested in learning more about the developer behind this project, you can visit their bio here:
-                                <a style={{ color: 'black' }} href="https://kingabdul.eth.xyz/" target="_blank" rel="noreferrer"> <b>About The Developer</b></a>
+                                <a style={{ color: 'black' }} href="https://kingabdullah.codes" target="_blank" rel="noreferrer"> <b>About The Developer</b></a>
                             </p>
                     </div>
                     <div>
