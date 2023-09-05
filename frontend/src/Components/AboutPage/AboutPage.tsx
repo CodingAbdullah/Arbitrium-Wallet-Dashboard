@@ -20,6 +20,18 @@ const AboutPage: React.FC = () => {
                             </p>
                     </div>
                     <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <h4 className="p-2">Open Source Code</h4>
+                            <hr />
+                    </div>
+                    <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <p className="p-1">
+                                All the code required to make this web application possible is open source and available for all. 
+                                This was done to ensure safety and allow anyone to verify the application for themselves prior to usage.
+                                Link to the code repository is <b><a href="https://github.com/CodingAbdullah/Arbitrum-Wallet-Dashboard">here</a>.</b>
+                            </p>
+                            <hr />
+                    </div>
+                    <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                             <h4 className="p-2">Credits</h4>
                             <hr />
                     </div>
