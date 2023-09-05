@@ -27,7 +27,7 @@ const AboutPage: React.FC = () => {
                             <p className="p-1">
                                 All the code required to make this web application possible is open source and available for all. 
                                 This was done to ensure safety and allow anyone to verify the application for themselves prior to usage.
-                                Link to the code repository is <b><a href="https://github.com/CodingAbdullah/Arbitrum-Wallet-Dashboard">here</a>.</b>
+                                Link to the code repository is <b><a style={{ color: 'black' }} href="https://github.com/CodingAbdullah/Arbitrum-Wallet-Dashboard">here</a>.</b>
                             </p>
                             <hr />
                     </div>
