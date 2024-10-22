@@ -1,63 +1,75 @@
-import React from 'react';
-import { useNavigate } from 'react-router';
+// About Page for the Arbitrum Wallet Dashboard
 
-const AboutPage: React.FC = () => {
-    const navigate = useNavigate();
-    
-    // Adding About page
-    return (
-        <div className='about p-3' style={{ textAlign: 'center' }}>
+const AboutPage = () => {
+
+        return (
                 <main role="main">
-                    <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                            <h1 className="h2 p-2">About</h1>
-                            <hr />
-                    </div>
-                    <div className="d-flex justify-content-between flex-wrap flex-md-nowrap pt-3 pb-2 mb-3 border-bottom">
-                            <p className="p-1">
-                                The Arbitrum Wallet Dashboard is a lightweight implementation of this 
-                                <a href="https://ethwdashboard.xyz" style={{ color: 'black', fontWeight: 'bold' }} target="_blank" rel="noreferrer"> Dashboard</a>. 
-                                Features available here include token lookups, wallet analysis, and gas prices.
-                            </p>
-                    </div>
-                    <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                            <h4 className="p-2">Open Source Code</h4>
-                            <hr />
-                    </div>
-                    <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                            <p className="p-1">
-                                All the code required to make this web application possible is open source and available for all. 
-                                This was done to ensure safety and allow anyone to verify the application for themselves prior to usage.
-                                Link to the code repository is <b><a style={{ color: 'black' }} href="https://github.com/CodingAbdullah/Arbitrum-Wallet-Dashboard">here</a>.</b>
-                            </p>
-                            <hr />
-                    </div>
-                    <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                            <h4 className="p-2">Credits</h4>
-                            <hr />
-                    </div>
-                    <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                            <p className="p-1">
-                                The APIs used in this project were free of charge, with some limited restrictions [calls/(second/minute/hour), etc.].
-                                A list of these can be found in the footer section of this app.
-                            </p>
-                            <hr />
-                    </div>
-                    <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                            <h4 className="p-2">Author/Developer Information</h4>
-                            <hr />
-                    </div>
-                    <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                            <p className="p-1">
-                                If you are interested in learning more about the developer behind this project, you can visit their bio here:
-                                <a style={{ color: 'black' }} href="https://kingabdullah.codes" target="_blank" rel="noreferrer"> <b>About The Developer</b></a>
-                            </p>
-                    </div>
-                    <div>
-                        <button className="btn btn-success" style={{ marginTop: '1.5rem' }} onClick={() => navigate("/")}>Go Home</button>
-                    </div>
+                        <section className="jumbotron text-center">
+                        <div className="container">
+                                <h1 style={{ marginTop: '1rem' }}>About</h1>
+                                <hr />
+                                <p className="lead text-muted">
+                                        <i>An implementation of a lightweight version of Arbiscan! Feel free to explore all there is in the world of Ethereum with one click!
+                                        View wallet activity, recent transactions, asset holdings, ERC20/721 token data, and so much more!</i>
+                                </p>
+                                <p style={{ marginTop: '2rem', marginLeft: 'auto', marginRight: 'auto', width: '50%' }} className="lead muted">
+                                        <i>If you are interested in learning about the developer, you can visit their bio <a style={{ color: 'black' }} href="https://github.com/CodingAbdullah" target="_blank" rel="noreferrer">here!</a></i>
+                                </p>
+                        </div>
+                        </section>
+                        <div className="py-5">
+                                <div className="container">
+                                <div className="row">
+                                        <div className="col-md-4">
+                                        <div className="card mb-4">
+                                                <div className="card-body">
+                                                <img src={ require("../../assets/images/about_code.png") } style={{ marginTop: '1rem', borderRadius: '25%' }} width="100" height="100" alt="No Logo" />
+                                                <h3 style={{ marginTop: '2rem' }}>Open Source</h3>
+                                                <hr />
+                                                <p className="card-text text-muted">
+                                                        <i>Project is continually growing and adding features as the blockchain space evolves. As such, the codebase will always be open source!</i>
+                                                </p>
+                                                <a style={{ marginBottom: '1rem' }} target="_blank" rel="noreferrer" href="https://github.com/CodingAbdullah/Arbitrum-Wallet-Dashboard" className="btn btn-success">
+                                                        View Source Code!
+                                                </a>
+                                                </div>
+                                        </div>
+                                        </div>
+                                        <div className="col-md-4">
+                                        <div className="card mb-4 shadow-sm">
+                                                <div className="card-body">
+                                                <img src={ require("../../assets/images/about_chart.png") } style={{ marginTop: '1rem', borderRadius: '25%' }} width="100" height="100" alt="No Logo" />
+                                                <h3 style={{ marginTop: '2rem' }}>Live Updates</h3>
+                                                <hr />
+                                                <p className="card-text text-muted">
+                                                        <i>Features are updated in real-time! Explore Arbitrum price action and information related to your wallet!</i>
+                                                </p>
+                                                <a style={{ marginBottom: '1rem' }} target="_blank" rel="noreferrer" href="/prices" className="btn btn-success">
+                                                        View Coin Prices!
+                                                </a>
+                                                </div>
+                                        </div>
+                                        </div>
+                                        <div className="col-md-4">
+                                        <div className="card mb-4 shadow-sm">
+                                                <div className="card-body">
+                                                <img src={ require("../../assets/images/about_ethereum.png") } style={{ marginTop: '1rem', borderRadius: '25%' }} width="100" height="100" alt="No Logo" />
+                                                <h3 style={{ marginTop: '2rem' }}>Crypto APIs</h3>
+                                                <hr />
+                                                <p className="card-text">
+                                                        <i>APIs are the main source of truth. They are verified and secure meaning that you do not have to worry about security!</i>
+                                                </p>
+                                                <a style={{ marginBottom: '1rem' }} href="https://github.com/CodingAbdullah/Ethereum-Wallet-Dashboard/blob/main/README.md" rel="no referrer" target="_blank" className="btn btn-success">
+                                                        View the APIs!
+                                                </a>
+                                                </div>
+                                        </div>
+                                        </div>
+                                </div>
+                                </div>
+                        </div>
                 </main>
-        </div>
-    )
-}
-
-export default AboutPage;
+                );
+        }
+            
+        export default AboutPage;
