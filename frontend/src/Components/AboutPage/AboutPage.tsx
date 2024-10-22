@@ -44,7 +44,7 @@ return (
                                         <p className="card-text text-muted">
                                                 <i>Features are updated in real-time! Explore Arbitrum price action and information related to your wallet!</i>
                                         </p>
-                                        <a style={{ marginBottom: '1rem' }} target="_blank" rel="noreferrer" href="/prices" className="btn btn-success">
+                                        <a style={{ marginBottom: '1rem' }} target="_blank" rel="noreferrer" href="/arb-price-lookup" className="btn btn-success">
                                                 View Coin Prices!
                                         </a>
                                         </div>
