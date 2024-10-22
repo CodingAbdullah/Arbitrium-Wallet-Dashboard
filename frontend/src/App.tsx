@@ -14,14 +14,12 @@ import GasTrackerPage from './Components/GasPricesPage/GasPricesPage';
 import WalletAnalyticsResultPage from './Components/WalletAnalyticsResultPage/WalletAnalyticsResultPage';
 import MetricsNavbar from './Components/MetricsNavbar/MetricsNavbar';
 import ArbPriceLookupPage from './Components/ArbPriceLookupPage/ArbPriceLookupPage';
-import TokenEligibilityNavbar from './Components/TokenEligibilityNavbar/TokenEligibilityNavbar';
 
 const App: React.FC = () => {
   return (
     <div className="App">
       <Navbar />
       <MetricsNavbar />
-      <TokenEligibilityNavbar />
       <Router>
         <Routes>
           <Route path="/about" element={<AboutPage />}></Route>
