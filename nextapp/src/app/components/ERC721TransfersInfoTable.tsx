@@ -1,3 +1,5 @@
+'use client';
+
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../components/ui/table";
 import ERC721TransfersType  from "../utils/types/ERC721TransfersType";
 
@@ -8,7 +10,7 @@ export default function ERC721TransfersInfoTable(props : { address: string, data
     // Render the Arbitrum ERC721 Transfers Info Table Component
     return (
         <div className="p-4 bg-gray-900 mt-10 shadow-lg">
-            <h2 className="text-2xl font-bold mb-4 text-gray-100">Holdings</h2>
+            <h2 className="text-2xl font-bold mb-4 text-gray-100">Transfers</h2>
             <Table>
                 <TableHeader>
                     <TableRow>
@@ -21,13 +23,13 @@ export default function ERC721TransfersInfoTable(props : { address: string, data
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    { data.transfers.result.map((record, key) => {
+                    { data?.transfers?.result?.map((record, key) => {
                         return (
                             <TableRow key={key} className="border-b border-gray-800">
-                                <TableCell className="font-medium text-gray-100">{ record.block_timestamp.split("T")[0] + ' - ' + record.block_timestamp.split("T")[1] }</TableCell>
+                                <TableCell className="font-medium text-gray-100">{ record.block_timestamp.split("T")[0] + ' - ' + record.block_timestamp.split("T")[1].split(".")[0] }</TableCell>
                                 <TableCell className="font-medium text-gray-100">{ record.token_address }</TableCell>
                                 <TableCell className="font-medium text-gray-100">{ record.token_id }</TableCell>
-                                <TableCell className={record.to_address === address ? 'text-green-500' : 'text-red-500'}>
+                                <TableCell className={ record.to_address === address ? 'text-green-500' : 'text-red-500' }>
                                     { record.to_address === address ? 'IN' : 'OUT' }
                                 </TableCell>
                                 <TableCell className="font-medium text-gray-100">{ record.from_address }</TableCell>

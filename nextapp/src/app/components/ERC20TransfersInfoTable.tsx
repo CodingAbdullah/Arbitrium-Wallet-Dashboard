@@ -1,3 +1,5 @@
+'use client';
+
 import ERC20TransfersType from '../utils/types/ERC20TransfersType';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../components/ui/table";
 

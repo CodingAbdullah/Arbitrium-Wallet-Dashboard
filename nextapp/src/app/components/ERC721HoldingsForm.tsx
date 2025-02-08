@@ -33,13 +33,13 @@ export default function ERC721HoldingsForm() {
             const erc721Holdings = await fetch('/api/arbitrum-erc721-holdings-data', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ address: walletAddressRef.current!.value.trim() })
+                body: JSON.stringify({ walletAddress: walletAddressRef.current!.value.trim() })
             });
 
             const erc721Transfers = await fetch('/api/arbitrum-erc721-transfers-data', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ address: walletAddressRef.current!.value.trim })
+                body: JSON.stringify({ walletAddress: walletAddressRef.current!.value.trim() })
             });
 
             // Check the status of ERC721 Holdings Data

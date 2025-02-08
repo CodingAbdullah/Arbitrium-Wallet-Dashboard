@@ -1,14 +1,16 @@
+'use client';
+
 import ERC20HoldingsType from "../utils/types/ERC20HoldingsType";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../components/ui/table";
 
-// Pass in the array of objects of type ERC20Holdings to the data properties of the prop object
+// Pass in the array of objects of type ERC20 Holdings to the data properties of the prop object
 export default function ERC20HoldingsInfoTable(props : { data: ERC20HoldingsType[] }) {
     const { data } = props;
 
     // Render the Arbitrum ERC20 Holdings Info Table Component
     return (
         <div className="p-4 bg-gray-900 mt-10 shadow-lg">
-            <h2 className="text-2xl font-bold mb-4 text-gray-100">Transfers</h2>
+            <h2 className="text-2xl font-bold mb-4 text-gray-100">Holdings</h2>
             <Table>
                 <TableHeader>
                     <TableRow>

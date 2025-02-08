@@ -1,3 +1,5 @@
+'use client';
+
 import Link from "next/link";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../components/ui/table";
 import ERC721HoldingsType  from "../utils/types/ERC721HoldingsType";
@@ -21,7 +23,7 @@ export default function ERC721HoldingsInfoTable(props : { data: ERC721HoldingsTy
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    { data.holdings.result.map((record, key) => {
+                    { data?.holdings?.result?.map((record, key) => {
                         return (
                             <TableRow key={key} className="border-b border-gray-800">
                                 <TableCell className="font-medium text-gray-100">{ record.name }</TableCell>
@@ -29,7 +31,7 @@ export default function ERC721HoldingsInfoTable(props : { data: ERC721HoldingsTy
                                 <TableCell className="font-medium text-gray-100">{ record.token_id }</TableCell>
                                 <TableCell className="font-medium text-gray-100">{ record.symbol }</TableCell>
                                 <TableCell>
-                                    <Link href={ "https://opensea.io/assets/arbitrum/" + record.token_address + "/" + record.token_id } target="_blank" rel="noreferrer">ERC721 Link</Link>
+                                    <Link href={ "https://opensea.io/assets/arbitrum/" + record.token_address + "/" + record.token_id } target="_blank" rel="noreferrer"><u>ERC721 Link</u></Link>
                                 </TableCell>
                             </TableRow>
                         )
