@@ -1,14 +1,14 @@
 import hex2dec from 'hex2dec';
 import { NextResponse } from "next/server";
 
-// Default function for working with a POST request
+// Default function for working with a GET request
 export async function GET() {
 
     // Setting options for request parameters
     const options = {
         method: 'GET',
         headers: {
-            'content-type': 'application/json',
+            'content-type': 'application/json'
         } as HeadersInit
     };
 
@@ -20,7 +20,7 @@ export async function GET() {
         // Return Arbitrum Gas details
         return NextResponse.json({ 
             chainInformation: data,
-            gasPrice: Number(hex2dec.hexToDec(data.result))/1000000000 + " Gwei"
+            gasPrice: Number(hex2dec.hexToDec(data.result))/1000000000 + ' GWei'
         });
 
     } 
