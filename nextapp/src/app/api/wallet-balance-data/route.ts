@@ -24,7 +24,7 @@ export async function POST(request: Request) {
         // Return the dataset
         return NextResponse.json({
             balanceInformation: arbData,
-            ethPrice: ethData.data.ethereum.usd
+            ethPrice: ethData.ethereum.usd
         });
     }
     catch (err) {
