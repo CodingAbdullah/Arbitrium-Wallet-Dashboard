@@ -1,5 +1,5 @@
 // Adding ERC20TransferType to represent ERC20 transfers
-export default interface ERC20TransferType {
+export default interface ERC20TransfersType {
     total: number,
     page: number,
     page_size: number,
