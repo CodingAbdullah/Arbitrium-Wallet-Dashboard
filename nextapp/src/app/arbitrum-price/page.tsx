@@ -1,4 +1,11 @@
 import ArbitrumPriceChart from "../components/ArbitrumPriceChart";
+import type { Metadata } from "next"
+
+// Custom Metadata
+export const metadata: Metadata = {
+  title: "Arbitrum Price",
+  description: "Lookup price metrics related to the Arbitrum blockchain"
+}
 
 // Arbitrum Price Page Wrapper Custom Component
 export default function ArbitrumPricePage() {

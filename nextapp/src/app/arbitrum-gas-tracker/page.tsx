@@ -1,4 +1,11 @@
 import ArbitrumGasInfoTable from "../components/ArbitrumGasInfoTable";
+import type { Metadata } from "next"
+
+// Custom Metadata
+export const metadata: Metadata = {
+  title: "Arbitrum Gas",
+  description: "Lookup metrics related to Arbitrum gas"
+}
 
 // Arbitrum Gas Page Custom Component
 export default function ArbitrumGasPage() {
